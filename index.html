@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For My Jan ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -15,71 +15,70 @@
     font-family:'Poppins',sans-serif;
 }
 
+/* ========== BODY (color changes automatically) ========== */
 body{
     height:100vh;
     overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ffd6e8,#ffe6f2,#fff0f7);
+    transition:background 1.5s ease; /* smooth color fade */
+    background:linear-gradient(135deg,#ffd6e8,#fff5fa);
 }
 
-/* Floating hearts background */
+/* floating hearts */
 body::before{
-    content:"❤️ 💕 💖 💗 💓 💘";
+    content:"❤️ 💕 💖 💘 💗 💓 ❤️ 💕";
     position:absolute;
-    font-size:40px;
-    opacity:0.15;
+    font-size:38px;
+    opacity:0.12;
     width:100%;
     height:100%;
     display:flex;
     justify-content:space-around;
     align-items:center;
-    animation:float 8s linear infinite;
+    animation:float 10s linear infinite;
+    pointer-events:none;
 }
 
 @keyframes float{
-    0%{transform:translateY(100px)}
-    100%{transform:translateY(-100px)}
+    0%{transform:translateY(80px)}
+    100%{transform:translateY(-80px)}
 }
 
-/* ---------- PAGES ---------- */
+/* ========== PAGES ========== */
 .page{
     display:none;
     text-align:center;
-    padding:30px;
 }
-
 .show{
     display:block;
 }
 
-/* ---------- CARD ---------- */
+/* ========== CARD ========== */
 .card{
     background:white;
-    padding:40px;
+    padding:45px;
     border-radius:25px;
-    box-shadow:0 15px 40px rgba(255,105,180,0.3);
+    box-shadow:0 15px 45px rgba(255,105,180,0.25);
     min-width:320px;
-    max-width:380px;
 }
 
-/* ---------- TEXT ---------- */
+/* ========== TEXT ========== */
 h1{
     color:#ff4b91;
     margin-bottom:25px;
-    font-size:26px;
 }
 
-/* ---------- BUTTONS ---------- */
+/* ========== BUTTONS ========== */
 .btn{
-    padding:12px 25px;
+    padding:12px 26px;
     margin:8px;
     border:none;
-    border-radius:25px;
-    cursor:pointer;
+    border-radius:30px;
     font-size:16px;
-    transition:0.3s;
+    cursor:pointer;
+    transition:0.25s;
 }
 
 .yes{
@@ -88,7 +87,7 @@ h1{
 }
 
 .no{
-    background:#aaa;
+    background:#999;
     color:white;
 }
 
@@ -96,10 +95,9 @@ h1{
     transform:scale(1.1);
 }
 
-/* ---------- TEDDY ---------- */
+/* ========== TEDDY ========== */
 .teddy{
     font-size:120px;
-    margin:15px 0;
     animation:bounce 2s infinite;
 }
 
@@ -107,27 +105,30 @@ h1{
     50%{transform:translateY(-10px)}
 }
 
-/* ---------- GIFT BOX ---------- */
+/* ========== GIFT ========== */
 .gift{
-    font-size:55px;
+    font-size:60px;
     cursor:pointer;
-    transition:0.3s;
-}
-
-.gift:hover{
-    transform:scale(1.2);
 }
 
 .arrow{
-    font-size:30px;
+    font-size:24px;
     animation:blink 1s infinite;
 }
 
 @keyframes blink{
     50%{opacity:0}
 }
+
+#finalText{
+    display:none;
+    margin-top:15px;
+    color:#ff4b91;
+    font-weight:600;
+}
 </style>
 </head>
+
 <body>
 
 
@@ -135,71 +136,82 @@ h1{
 <div id="page1" class="page show">
   <div class="card">
     <h1>I want to ask something 💌</h1>
-
     <button class="btn no">No</button>
     <button class="btn yes" onclick="goPage2()">Hukm meri jan ❤️</button>
   </div>
 </div>
 
 
-
 <!-- PAGE 2 -->
 <div id="page2" class="page">
   <div class="card">
-    <h1>Do you love me Azu? 🥺💖</h1>
-
+    <h1>Do you love me Azu? 🥺</h1>
     <button class="btn yes" onclick="goPage3()">Yes</button>
     <button class="btn no" id="runBtn">No</button>
   </div>
 </div>
 
 
-
 <!-- PAGE 3 -->
 <div id="page3" class="page">
   <div class="card">
-
       <div class="teddy">🧸</div>
-      <div class="arrow">👇 Click the box</div>
+      <div class="arrow">👇 click the gift</div>
       <div class="gift" onclick="openGift()">🎁</div>
-
-      <h1 id="finalText" style="display:none;margin-top:15px;">
-        Yes akm meri jan i love you ❤️🥰
-      </h1>
-
+      <h1 id="finalText">Yes akm meri jan i love you ❤️🥰</h1>
   </div>
 </div>
 
 
 
 <script>
-/* ---------- PAGE SWITCH ---------- */
+/* -------- PAGE SWITCH -------- */
 function goPage2(){
-    document.getElementById("page1").classList.remove("show");
-    document.getElementById("page2").classList.add("show");
+    page1.classList.remove("show");
+    page2.classList.add("show");
 }
 
 function goPage3(){
-    document.getElementById("page2").classList.remove("show");
-    document.getElementById("page3").classList.add("show");
+    page2.classList.remove("show");
+    page3.classList.add("show");
 }
 
-/* ---------- RUNNING NO BUTTON 😂 ---------- */
+/* -------- RUNNING NO BUTTON -------- */
 const runBtn = document.getElementById("runBtn");
 
 runBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 60);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 70);
 
     runBtn.style.position="absolute";
-    runBtn.style.left = x+"px";
-    runBtn.style.top = y+"px";
+    runBtn.style.left=x+"px";
+    runBtn.style.top=y+"px";
 });
 
-/* ---------- OPEN GIFT ---------- */
+/* -------- GIFT OPEN -------- */
 function openGift(){
     document.getElementById("finalText").style.display="block";
 }
+
+/* ================================================= */
+/* 🌈 AUTO COLOR CHANGE EVERY 2 SECONDS */
+/* ================================================= */
+
+const gradients = [
+"linear-gradient(135deg,#ffd6e8,#fff5fa)",
+"linear-gradient(135deg,#ffe0f0,#fce1ff)",
+"linear-gradient(135deg,#d4fcff,#ffe6fa)",
+"linear-gradient(135deg,#fff0f7,#ffe5ec)",
+"linear-gradient(135deg,#e0c3fc,#ffd6e8)"
+];
+
+let index = 0;
+
+setInterval(()=>{
+    document.body.style.background = gradients[index];
+    index = (index + 1) % gradients.length;
+},2000);
+
 </script>
 
 </body>
