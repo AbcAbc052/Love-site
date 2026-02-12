@@ -3,69 +3,82 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For My Darling ❤️</title>
+<title>For My Jan ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: "Poppins", sans-serif;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
     height:100vh;
     overflow:hidden;
-}
-
-/* ========== COMMON PAGE STYLE ========== */
-.page{
-    display:none;
-    height:100vh;
-    width:100%;
-    text-align:center;
+    display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
-    color:white;
+    background:linear-gradient(135deg,#ffd6e8,#ffe6f2,#fff0f7);
+}
+
+/* Floating hearts background */
+body::before{
+    content:"❤️ 💕 💖 💗 💓 💘";
+    position:absolute;
+    font-size:40px;
+    opacity:0.15;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100px)}
+    100%{transform:translateY(-100px)}
+}
+
+/* ---------- PAGES ---------- */
+.page{
+    display:none;
+    text-align:center;
+    padding:30px;
 }
 
 .show{
-    display:flex;
+    display:block;
 }
 
-/* ========== PAGE 1 (FLOWERS) ========== */
-#page1{
-    background:url("https://images.unsplash.com/photo-1490750967868-88aa4486c946") center/cover no-repeat;
+/* ---------- CARD ---------- */
+.card{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(255,105,180,0.3);
+    min-width:320px;
+    max-width:380px;
 }
 
-/* ========== PAGE 2 (DOOR) ========== */
-#page2{
-    background:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511") center/cover no-repeat;
-}
-
-/* ========== PAGE 3 (WELCOME) ========== */
-#page3{
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-}
-
-/* ========== TEXT ========== */
+/* ---------- TEXT ---------- */
 h1{
-    font-size:38px;
-    background:rgba(0,0,0,0.6);
-    padding:15px 25px;
-    border-radius:12px;
-    margin-bottom:30px;
+    color:#ff4b91;
+    margin-bottom:25px;
+    font-size:26px;
 }
 
-/* ========== BUTTONS ========== */
+/* ---------- BUTTONS ---------- */
 .btn{
-    padding:12px 28px;
-    font-size:18px;
+    padding:12px 25px;
+    margin:8px;
     border:none;
-    border-radius:30px;
+    border-radius:25px;
     cursor:pointer;
-    margin:10px;
+    font-size:16px;
     transition:0.3s;
 }
 
@@ -75,7 +88,7 @@ h1{
 }
 
 .no{
-    background:#555;
+    background:#aaa;
     color:white;
 }
 
@@ -83,75 +96,84 @@ h1{
     transform:scale(1.1);
 }
 
-/* ========== DOOR STYLE ========== */
-.door{
-    width:160px;
-    height:260px;
-    background:#7b4b2a;
-    border-radius:6px;
-    margin:20px auto;
-    box-shadow:0 0 25px rgba(0,0,0,0.7);
-    position:relative;
+/* ---------- TEDDY ---------- */
+.teddy{
+    font-size:120px;
+    margin:15px 0;
+    animation:bounce 2s infinite;
 }
 
-.door:after{
-    content:"🚪";
-    font-size:100px;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+@keyframes bounce{
+    50%{transform:translateY(-10px)}
+}
+
+/* ---------- GIFT BOX ---------- */
+.gift{
+    font-size:55px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.gift:hover{
+    transform:scale(1.2);
+}
+
+.arrow{
+    font-size:30px;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0}
 }
 </style>
 </head>
-
 <body>
 
-<!-- ================= PAGE 1 ================= -->
+
+<!-- PAGE 1 -->
 <div id="page1" class="page show">
-    <h1>Hy Darling How are You ❤️</h1>
+  <div class="card">
+    <h1>I want to ask something 💌</h1>
 
-    <div>
-        <button class="btn yes" onclick="goPage2()">Yes</button>
-        <button class="btn no" id="noBtn">No</button>
-    </div>
+    <button class="btn no">No</button>
+    <button class="btn yes" onclick="goPage2()">Hukm meri jan ❤️</button>
+  </div>
 </div>
 
 
-<!-- ================= PAGE 2 ================= -->
+
+<!-- PAGE 2 -->
 <div id="page2" class="page">
-    <h1>Do you wanna open the door? 💕</h1>
+  <div class="card">
+    <h1>Do you love me Azu? 🥺💖</h1>
 
-    <div class="door"></div>
-
-    <div>
-        <button class="btn yes" onclick="goPage3()">Yes</button>
-        <button class="btn no" onclick="goPage1()">No</button>
-    </div>
+    <button class="btn yes" onclick="goPage3()">Yes</button>
+    <button class="btn no" id="runBtn">No</button>
+  </div>
 </div>
 
 
-<!-- ================= PAGE 3 ================= -->
+
+<!-- PAGE 3 -->
 <div id="page3" class="page">
-    <h1 style="font-size:45px;">Wellcome meri jan 💖🥰</h1>
+  <div class="card">
+
+      <div class="teddy">🧸</div>
+      <div class="arrow">👇 Click the box</div>
+      <div class="gift" onclick="openGift()">🎁</div>
+
+      <h1 id="finalText" style="display:none;margin-top:15px;">
+        Yes akm meri jan i love you ❤️🥰
+      </h1>
+
+  </div>
 </div>
 
 
 
 <script>
-const noBtn = document.getElementById("noBtn");
-
-/* Make NO button run away 😂 */
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * window.innerWidth - 100;
-    const y = Math.random() * window.innerHeight - 50;
-
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
-
-
+/* ---------- PAGE SWITCH ---------- */
 function goPage2(){
     document.getElementById("page1").classList.remove("show");
     document.getElementById("page2").classList.add("show");
@@ -162,12 +184,23 @@ function goPage3(){
     document.getElementById("page3").classList.add("show");
 }
 
-function goPage1(){
-    document.getElementById("page2").classList.remove("show");
-    document.getElementById("page1").classList.add("show");
+/* ---------- RUNNING NO BUTTON 😂 ---------- */
+const runBtn = document.getElementById("runBtn");
+
+runBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 60);
+
+    runBtn.style.position="absolute";
+    runBtn.style.left = x+"px";
+    runBtn.style.top = y+"px";
+});
+
+/* ---------- OPEN GIFT ---------- */
+function openGift(){
+    document.getElementById("finalText").style.display="block";
 }
 </script>
 
 </body>
-
 </html>
