@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Azra ❤️</title>
+    <title>Azra's Digital Gift 🎁</title>
     <style>
-        /* All previous styles remain exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -13,757 +12,344 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-            color: white;
-            overflow-x: hidden;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #0a0f1e;
+            color: #fff;
+            overflow: hidden; /* no scroll until icons appear */
+            height: 100vh;
+            width: 100vw;
+            position: relative;
         }
 
-        /* Floating Hearts */
-        .floating-hearts {
-            position: fixed;
+        /* Animated binary rain background (subtle tech vibe) */
+        #binary-bg {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            opacity: 0.15;
             z-index: 1;
         }
 
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.6);
-            animation: float 6s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Main Container */
+        /* Main container */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
             position: relative;
-            z-index: 2;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        .hero .nickname {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ffe6f0;
-        }
-
-        .hero .message {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
-            50% { text-shadow: 0 0 50px rgba(255,255,255,0.8); }
-        }
-
-        .countdown {
-            display: flex;
-            gap: 20px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            min-width: 100px;
-        }
-
-        .countdown-item span {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-        }
-
-        /* Section Headers */
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        h2:after {
-            content: "❤️";
-            display: block;
-            font-size: 1.5rem;
-            margin-top: 10px;
-        }
-
-        /* NEW: Floating Open Me Heart Section */
-        .open-heart-section {
-            text-align: center;
-            margin: 50px 0 80px;
-            padding: 20px;
-        }
-
-        .floating-heart-btn {
-            font-size: 8rem;
-            cursor: pointer;
-            display: inline-block;
-            animation: heartbeat 1.5s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 80, 120, 0.8));
-            transition: transform 0.3s;
-        }
-
-        .floating-heart-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .heart-message {
-            display: none;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 50px;
-            max-width: 600px;
-            margin: 30px auto 0;
-            font-size: 1.5rem;
-            line-height: 1.8;
-            border: 2px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .heart-message p {
-            margin: 0;
-        }
-
-        .heart-message .signature {
-            font-size: 1.2rem;
-            margin-top: 20px;
-            color: #ffe6f0;
-        }
-
-        /* Photo Gallery */
-        .gallery {
-            padding: 50px 0;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            cursor: pointer;
-            aspect-ratio: 1;
-        }
-
-        .gallery-item img {
+            z-index: 10;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            color: white;
-            padding: 15px;
-            transform: translateY(100%);
+        /* Gift box styling (initial) */
+        .gift-wrapper {
+            text-align: center;
+            cursor: pointer;
             transition: transform 0.3s;
         }
 
-        .gallery-item:hover .caption {
-            transform: translateY(0);
-        }
-
-        /* Love Letter */
-        .love-letter {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 30px;
-            margin: 50px 0;
-            text-align: center;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-
-        .love-letter p {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .love-letter .urdu {
-            font-size: 1.5rem;
-            font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
-            line-height: 2;
-        }
-
-        /* Hidden Surprise (original gift box) */
-        .hidden-surprise {
-            text-align: center;
-            margin: 50px 0;
-        }
-
-        .surprise-box {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(45deg, #ff6b6b, #ffb347);
-            margin: 0 auto;
-            border-radius: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            animation: bounce 2s infinite;
-            border: 4px solid white;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .surprise-box:hover {
-            transform: scale(1.1) rotate(5deg);
-            animation: none;
-        }
-
-        .surprise-box span {
-            font-size: 4rem;
-        }
-
-        .hidden-message {
-            display: none;
-            margin-top: 30px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-        }
-
-        /* Timeline */
-        .timeline {
-            padding: 50px 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-
-        .timeline-content {
-            flex: 1;
-        }
-
-        .timeline-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #ffe6f0;
-        }
-
-        /* Reasons Grid */
-        .reasons {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 50px;
-            border-radius: 30px;
-            margin: 50px 0;
-        }
-
-        .reasons-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .reason-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .reason-card:hover {
+        .gift-wrapper:hover {
             transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Promise Section */
-        .promise {
-            text-align: center;
-            padding: 50px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 30px;
-            margin: 50px 0;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .promise p {
-            font-size: 1.8rem;
-            line-height: 1.8;
-            font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
-        }
-
-        .promise .signature {
-            font-size: 1.5rem;
-            margin-top: 30px;
-            color: #ffe6f0;
-        }
-
-        /* Quiz */
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            border-radius: 30px;
-            margin: 50px 0;
-        }
-
-        .quiz-question {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #ffe6f0;
-        }
-
-        .quiz-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .quiz-option {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-        }
-
-        .quiz-option:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .quiz-option.correct {
-            background: #4CAF50;
-        }
-
-        .quiz-option.wrong {
-            background: #f44336;
-        }
-
-        /* Open When Letters */
-        .open-when-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 50px 0;
-        }
-
-        .open-when-card {
-            background: linear-gradient(135deg, #ff758c, #ffb3c6);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid white;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .open-when-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .open-when-card.open {
-            background: linear-gradient(135deg, #ffb3c6, #ff758c);
-            cursor: default;
-        }
-
-        .letter-message {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Vouchers */
-        .vouchers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
-        }
-
-        .voucher {
-            background: linear-gradient(145deg, #ff9a9e, #fad0c4);
-            padding: 30px;
-            border-radius: 25px;
-            text-align: center;
-            border: 3px dashed white;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .voucher:hover {
-            transform: scale(1.05);
-            border: 3px solid white;
-        }
-
-        .voucher h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .voucher p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .redeem {
-            background: white;
-            color: #ff758c;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .redeem:hover {
-            background: #ff758c;
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .redeem:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Playlist */
-        .playlist {
-            background: rgba(255,255,255,0.15);
-            padding: 40px;
-            border-radius: 30px;
-            margin: 50px 0;
-        }
-
-        .song-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            transition: background 0.3s;
-        }
-
-        .song-item:hover {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        .song-number {
-            width: 50px;
-            font-size: 1.3rem;
-            color: #ffe6f0;
-        }
-
-        .song-info {
-            flex: 1;
-        }
-
-        .song-title {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .song-artist {
-            color: rgba(255,255,255,0.8);
-        }
-
-        /* Gift Box */
-        .gift-box-container {
-            text-align: center;
-            margin: 50px 0;
         }
 
         .gift-box {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #ff4d4d, #ff8080);
-            margin: 0 auto;
-            border-radius: 30px;
-            display: flex;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(145deg, #ff4d6d, #c9184a);
+            border-radius: 30px 30px 15px 15px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.4), 0 0 30px #ff4d6d;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            background: #ffb3c6;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: #ffb3c6;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 5px 0 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .gift-lid {
+            width: 320px;
+            height: 60px;
+            background: linear-gradient(145deg, #ff758c, #ff4d6d);
+            border-radius: 30px 30px 0 0;
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            z-index: 5;
+            transition: transform 0.5s;
+        }
+
+        .gift-lid.open {
+            transform: translateY(-100px) rotate(10deg);
+        }
+
+        .gift-message {
+            color: white;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            text-shadow: 0 0 10px #ff4d6d;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Icons container (hidden until box opens) */
+        .icons-container {
+            display: none;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.5s;
-            animation: shake 3s infinite;
-            border: 4px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            gap: 40px;
+            max-width: 1000px;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+            margin-top: 50px;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
-        }
-
-        .gift-box.open {
-            transform: scale(1.2);
-            animation: none;
-            background: linear-gradient(135deg, #ff8080, #ff4d4d);
-        }
-
-        .gift-content {
-            margin-top: 20px;
-            display: none;
-        }
-
-        /* Constellation */
-        .constellation {
-            text-align: center;
-            margin: 50px 0;
-            padding: 30px;
-            background: rgba(0,0,0,0.3);
+        .icon-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
-        }
-
-        .constellation canvas {
-            max-width: 100%;
-            border-radius: 20px;
-            margin-top: 20px;
-        }
-
-        /* Candle Animation */
-        .candle-section {
-            text-align: center;
-            margin: 50px 0;
-            padding: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 40px;
-        }
-
-        .candle {
-            font-size: 5rem;
-            animation: flicker 1.5s infinite;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        @keyframes flicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 20px orange; }
-            50% { opacity: 0.8; text-shadow: 0 0 40px orange; }
+        .icon-item:hover {
+            transform: scale(1.1);
+            border-color: #ff4d6d;
+            box-shadow: 0 0 30px #ff4d6d;
         }
 
-        .wish-message {
+        .icon-item span {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .icon-item p {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Modal styling for each content */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background: linear-gradient(145deg, #1a1f35, #0a0f1e);
+            border: 2px solid #ff4d6d;
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: white;
+            box-shadow: 0 20px 50px #ff4d6d;
+            position: relative;
+            animation: modalPop 0.3s;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             font-size: 2rem;
-            margin-top: 20px;
-            animation: glow 2s infinite;
+            cursor: pointer;
+            color: #ff4d6d;
+            transition: transform 0.2s;
         }
 
-        /* Music Button */
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-card h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffb3c6;
+        }
+
+        .modal-card p, .modal-card .content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Gallery grid inside modal */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #ff4d6d;
+        }
+
+        /* Floating signature */
+        .floating-signature {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 1rem;
+            border: 1px solid #ff4d6d;
+            z-index: 100;
+            color: #ffb3c6;
+        }
+
+        /* Music button */
         .music-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 18px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: white;
+            background: #ff4d6d;
             border: none;
-            cursor: pointer;
+            color: white;
             font-size: 1.5rem;
+            cursor: pointer;
             z-index: 100;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s;
+            box-shadow: 0 0 20px #ff4d6d;
+            transition: 0.3s;
         }
 
         .music-btn:hover {
             transform: scale(1.2);
         }
-
-        /* Floating Signature */
-        .floating-signature {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            z-index: 100;
-            border: 2px solid white;
-            animation: float-sig 3s infinite;
-        }
-
-        @keyframes float-sig {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Poem Section */
-        .poem {
-            text-align: center;
-            padding: 50px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 30px;
-            margin: 50px 0;
-            font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
-            line-height: 2.5;
-            font-size: 1.3rem;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero .nickname { font-size: 1.8rem; }
-            .hero .message { font-size: 1.5rem; }
-            h2 { font-size: 2rem; }
-            .countdown-item { min-width: 70px; padding: 15px; }
-            .countdown-item span { font-size: 1.8rem; }
-            .quiz-options { grid-template-columns: 1fr; }
-            .floating-signature { font-size: 1rem; padding: 8px 15px; }
-            .floating-heart-btn { font-size: 6rem; }
-            .heart-message { font-size: 1.2rem; }
-        }
     </style>
 </head>
 <body>
-    <!-- Floating Hearts -->
-    <div class="floating-hearts" id="hearts"></div>
+    <canvas id="binary-bg"></canvas>
 
     <!-- Floating Signature -->
-    <div class="floating-signature">
-        I Love Meri Jann 😘
-    </div>
+    <div class="floating-signature">💻 I Love Meri Jann 😘</div>
 
     <!-- Music Button -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Azra ❤️</h1>
-            <div class="nickname">Azu ❤️</div>
-            <div class="message">"Happy Birthday Cutiee"</div>
-            
-            <!-- Countdown Timer -->
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <span id="days">00</span>
-                    <p>Din</p>
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span>
-                    <p>Ghante</p>
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    <p>Minute</p>
-                </div>
-                <div class="countdown-item">
-                    <span id="seconds">00</span>
-                    <p>Seconds</p>
-                </div>
+    <!-- Main Container -->
+    <div class="container" id="container">
+        <!-- Initial Gift Box -->
+        <div class="gift-wrapper" id="giftWrapper" onclick="openGift()">
+            <div class="gift-box">
+                <div class="gift-lid" id="giftLid"></div>
             </div>
-        </section>
+            <div class="gift-message">Click to open your gift from your IT Boy 💻❤️</div>
+        </div>
 
-        <!-- NEW: Floating Open Me Heart -->
-        <section class="open-heart-section">
-            <div class="floating-heart-btn" onclick="revealHeartMessage()">
-                ❤️
+        <!-- Icons Container (hidden initially) -->
+        <div class="icons-container" id="iconsContainer">
+            <div class="icon-item" onclick="openModal('letter')">
+                <span>💌</span>
+                <p>Love Letter</p>
             </div>
-            <div class="heart-message" id="heartMessage">
-                <p>Meri Azra, tum mere dil ke kitne kareeb ho, yeh main kabhi alfaz mein nahi bayan kar sakta. Har din tumhari muskurahat ke liye taras jaata hoon. Tum meri zindagi ki roshni ho. ❤️</p>
-                <p class="signature">- Tumhara Akm</p>
+            <div class="icon-item" onclick="openModal('gallery')">
+                <span>📸</span>
+                <p>Gallery</p>
             </div>
-        </section>
+            <div class="icon-item" onclick="openModal('reasons')">
+                <span>💖</span>
+                <p>25 Reasons</p>
+            </div>
+            <div class="icon-item" onclick="openModal('promise')">
+                <span>🤝</span>
+                <p>Promise</p>
+            </div>
+            <div class="icon-item" onclick="openModal('vouchers')">
+                <span>🎟️</span>
+                <p>Vouchers</p>
+            </div>
+            <div class="icon-item" onclick="openModal('poem')">
+                <span>📝</span>
+                <p>Poem</p>
+            </div>
+            <div class="icon-item" onclick="openModal('playlist')">
+                <span>🎵</span>
+                <p>Playlist</p>
+            </div>
+            <div class="icon-item" onclick="openModal('candle')">
+                <span>🕯️</span>
+                <p>Wish</p>
+            </div>
+        </div>
+    </div>
 
-        <!-- Photo Gallery -->
-        <section class="gallery">
-            <h2>📸 Hmare Pyar Ki Kahani</h2>
-            <div class="gallery-grid" id="galleryGrid"></div>
-        </section>
+    <!-- Modals (hidden by default) -->
 
-        <!-- Love Letter -->
-        <section class="love-letter">
+    <!-- Love Letter Modal -->
+    <div class="modal" id="modal-letter">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('letter')">&times;</span>
             <h2>💌 Mere Dil Ki Baat</h2>
-            <p class="urdu">"Meri Jan pehly Pehly to Yahiii kahonga k Janan Din Mubarak Ho meri jan,<br>
+            <p class="urdu" style="font-size:1.3rem; line-height:2;">"Meri Jan pehly Pehly to Yahiii kahonga k Janan Din Mubarak Ho meri jan,<br>
             Tum smjh sktiii ho how can i feel for you,<br>
             Tum mery liye sab sy brh k Ho,<br>
             Is Special Din k moqay pr m yahi kahonga K Allah tumhain Khusian day,<br>
@@ -773,91 +359,55 @@
             You're the melody that fills my heart with joy, the rhythm that makes life worth living. Every moment with you is a sweet serendipity, a reminder that I'm exactly where I'm meant to be.<br><br>
             Thanks for being my partner in crime, my confidant, and my forever crush 😊<br><br>
             Happy birthday, my love!</p>
-        </section>
+        </div>
+    </div>
 
-        <!-- Hidden Surprise (original gift box) -->
-        <section class="hidden-surprise">
-            <h2>🎁 Kya Hai Andar?</h2>
-            <div class="surprise-box" onclick="revealSurprise()">
-                <span>🎀</span>
+    <!-- Gallery Modal -->
+    <div class="modal" id="modal-gallery">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('gallery')">&times;</span>
+            <h2>📸 Humari Yaadein</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- JS will generate 10 placeholders -->
             </div>
-            <div class="hidden-message" id="hiddenMessage">
-                <img src="your-photo.jpg" alt="Our Photo" style="max-width: 100%; border-radius: 10px;" onerror="this.src='https://via.placeholder.com/400x300/ff758c/ffffff?text=Azu+❤️'">
-                <p style="margin-top: 20px;">Humesha ❤️</p>
-            </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- Our Story Timeline -->
-        <section class="timeline">
-            <h2>📅 Humari Kahani</h2>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>💙 TikTok Pe Mulaqat</h3>
-                    <p>Credit jata hai TikTok ko... maine uske comment mein likha aur yahan tak aa pahunche</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>📞 Pehli Call - Sunday</h3>
-                    <p>Us din se awaaz dil mein utar gayi</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>🤝 Pehli Mulaqat - Monday</h3>
-                    <p>Monday ko milay aur lagta hai dil kho gaya</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>💕 Pehli Baar "Meri Jan"</h3>
-                    <p>Jab pehli baar "Meri Jan" kaha to woh surprised hui, par pasand aaya ❤️</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>🏨 Indus Hotel Wala Lamha</h3>
-                    <p>Woh pal jo kabhi nahi bhool sakte</p>
-                </div>
-            </div>
-        </section>
+    <!-- Reasons Modal -->
+    <div class="modal" id="modal-reasons">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('reasons')">&times;</span>
+            <h2>💖 25 Reasons I Love You</h2>
+            <div id="reasonsList" style="column-count:2; column-gap:20px;"></div>
+        </div>
+    </div>
 
-        <!-- Reasons I Love You -->
-        <section class="reasons">
-            <h2>💖 25 Reasons Why I Love You</h2>
-            <div class="reasons-list" id="reasonsList"></div>
-        </section>
-
-        <!-- Future Promise -->
-        <section class="promise">
+    <!-- Promise Modal -->
+    <div class="modal" id="modal-promise">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('promise')">&times;</span>
             <h2>🤝 Mera Wada</h2>
-            <p>"Halat jaisy bhi ho jain meri jan M kabhi niii chor skta tumhain,<br>
+            <p style="font-size:1.8rem; line-height:1.8;">"Halat jaisy bhi ho jain meri jan M kabhi niii chor skta tumhain,<br>
             M wada krta hn hamesha tumhara muntazir rahonga"<br><br>
-            <span style="font-size: 2rem;">" Tumhara Akm "</span></p>
-        </section>
+            <span style="font-size:2rem;">" Tumhara Akm "</span></p>
+        </div>
+    </div>
 
-        <!-- Quiz Game -->
-        <section class="quiz-container">
-            <h2>❓ Kitna Jaanti Ho Mujhe?</h2>
-            <div id="quiz"></div>
-        </section>
-
-        <!-- Open When Letters -->
-        <section>
-            <h2>💌 Open When...</h2>
-            <div class="open-when-grid" id="openWhenContainer"></div>
-        </section>
-
-        <!-- Date Night Vouchers -->
-        <section>
+    <!-- Vouchers Modal -->
+    <div class="modal" id="modal-vouchers">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('vouchers')">&times;</span>
             <h2>🎟️ Tumhare Liye Vouchers</h2>
-            <div class="vouchers" id="vouchersContainer"></div>
-        </section>
+            <div id="vouchersList"></div>
+        </div>
+    </div>
 
-        <!-- Birthday Poem -->
-        <section class="poem">
+    <!-- Poem Modal -->
+    <div class="modal" id="modal-poem">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('poem')">&times;</span>
             <h2>📝 Aik Poem Tumhare Naam</h2>
-            <p>
+            <p style="font-size:1.3rem; line-height:2.2;">
             تم آئی تو خاموشی نے بھی آواز دی<br>
             ہر سانس نے اک نیا انداز دیا<br><br>
             تم ہنسی تو پھول کھلے راستوں میں<br>
@@ -870,145 +420,104 @@
             تم ہو تو میں ہوں<br>
             تم ہو تو سب ہے
             </p>
-        </section>
+        </div>
+    </div>
 
-        <!-- Playlist -->
-        <section class="playlist">
+    <!-- Playlist Modal -->
+    <div class="modal" id="modal-playlist">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('playlist')">&times;</span>
             <h2>🎵 Humare Geet</h2>
-            <div id="playlistContainer"></div>
-        </section>
+            <div id="playlistItems"></div>
+        </div>
+    </div>
 
-        <!-- Virtual Gift Box -->
-        <section class="gift-box-container">
-            <h2>🎁 Tumhara Gift</h2>
-            <div class="gift-box" onclick="openGift(this)">
-                <span>🎀</span>
-            </div>
-            <div class="gift-content" id="giftContent">
-                <video controls style="max-width: 100%; border-radius: 20px;">
-                    <source src="your-video.mp4" type="video/mp4">
-                    Video placeholder - Add your surprise video here ❤️
-                </video>
-            </div>
-        </section>
-
-        <!-- Constellation Map -->
-        <section class="constellation">
-            <h2>✨ Sitaron Mein Likha</h2>
-            <p>6 June 2004 — Jab kismat likhi ja rahi thi</p>
-            <canvas id="constellation" width="600" height="300"></canvas>
-        </section>
-
-        <!-- Candle Animation -->
-        <section class="candle-section">
+    <!-- Candle Wish Modal -->
+    <div class="modal" id="modal-candle">
+        <div class="modal-card" style="text-align:center;">
+            <span class="close-modal" onclick="closeModal('candle')">&times;</span>
             <h2>🕯️ Ek Wish Karo</h2>
-            <div class="candle" onclick="blowCandle(this)">🕯️</div>
-            <div class="wish-message" id="wishMessage"></div>
-        </section>
+            <div class="candle" onclick="blowCandle(this)" style="font-size:5rem; cursor:pointer; animation:flicker 1.5s infinite;">🕯️</div>
+            <div class="wish-message" id="wishMessage" style="font-size:2rem; margin-top:20px;"></div>
+        </div>
     </div>
 
     <script>
-        // Initialize everything on page load
-        window.onload = function() {
-            startHearts();
-            loadGallery();
-            loadReasons();
-            loadQuiz();
-            loadOpenWhen();
-            loadVouchers();
-            loadPlaylist();
-            drawConstellation();
-        };
+        // Binary background animation
+        const canvas = document.getElementById('binary-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Floating Hearts
-        function startHearts() {
-            setInterval(createHeart, 300);
-        }
+        const binary = '01';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) drops[x] = 1;
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            document.getElementById('hearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
-        }
-
-        // Countdown Timer
-        function updateCountdown() {
-            const birthday = new Date('March 4, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = birthday - now;
-            
-            if(diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            } else {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
+        function drawBinary() {
+            ctx.fillStyle = 'rgba(10, 15, 30, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff4d6d';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                let text = binary[Math.floor(Math.random() * binary.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
         }
-        
-        setInterval(updateCountdown, 1000);
+        setInterval(drawBinary, 50);
 
-        // Music Control
+        // Music control
         let music = new Audio();
-        // Replace with your actual audio file
-        music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+        music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // replace with actual song
         music.loop = true;
-        
         function toggleMusic() {
-            if(music.paused) {
-                music.play();
-                document.getElementById('musicBtn').innerHTML = '⏸️';
-            } else {
-                music.pause();
-                document.getElementById('musicBtn').innerHTML = '🎵';
-            }
+            if (music.paused) { music.play(); document.getElementById('musicBtn').innerHTML = '⏸️'; }
+            else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
         }
 
-        // NEW: Reveal heart message
-        function revealHeartMessage() {
-            const msg = document.getElementById('heartMessage');
-            if (msg.style.display === 'none' || msg.style.display === '') {
-                msg.style.display = 'block';
-            } else {
-                msg.style.display = 'none';
-            }
+        // Gift opening
+        function openGift() {
+            document.getElementById('giftLid').classList.add('open');
+            setTimeout(() => {
+                document.querySelector('.gift-wrapper').style.display = 'none';
+                document.getElementById('iconsContainer').style.display = 'flex';
+                // Load gallery content dynamically
+                loadGallery();
+                loadReasons();
+                loadVouchers();
+                loadPlaylist();
+            }, 500);
         }
 
-        // Hidden Surprise (original gift box)
-        function revealSurprise() {
-            document.getElementById('hiddenMessage').style.display = 'block';
+        // Modal functions
+        function openModal(type) {
+            document.getElementById(modal-${type}).style.display = 'flex';
+        }
+        function closeModal(type) {
+            document.getElementById(modal-${type}).style.display = 'none';
         }
 
-        // Load Gallery
+        // Load gallery images (placeholders)
         function loadGallery() {
             const gallery = document.getElementById('galleryGrid');
-            for(let i = 1; i <= 10; i++) {
-                let item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `
-                    <img src="photo${i}.jpg" alt="Memory ${i}" onerror="this.src='https://via.placeholder.com/300x300/ff758c/ffffff?text=Azu+❤️+${i}'">
-                    <div class="caption">Humari yaadein 🥺</div>
-                `;
-                gallery.appendChild(item);
+            if (!gallery) return;
+            gallery.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                let img = document.createElement('img');
+                img.src = https://via.placeholder.com/200x200/ff4d6d/ffffff?text=Azu+${i};
+                img.alt = Memory ${i};
+                gallery.appendChild(img);
             }
         }
 
-        // Load Reasons
+        // Load reasons
         function loadReasons() {
-            const reasons = document.getElementById('reasonsList');
-            const reasonsList = [
+            const container = document.getElementById('reasonsList');
+            if (!container) return;
+            const reasons = [
                 'Your smile that lights up my world',
                 'The way you laugh — it\'s pure magic',
                 'Your eyes — I get lost in them',
@@ -1035,218 +544,65 @@
                 'Your hugs — they fix everything',
                 'You exist. That\'s enough.'
             ];
-            
-            reasonsList.forEach((reason, i) => {
-                let card = document.createElement('div');
-                card.className = 'reason-card';
-                card.innerHTML = ${i+1}. ${reason};
-                reasons.appendChild(card);
+            reasons.forEach((r, i) => {
+                let p = document.createElement('p');
+                p.innerHTML = ${i+1}. ${r};
+                p.style.margin = '5px 0';
+                container.appendChild(p);
             });
         }
 
-        // Load Quiz
-        function loadQuiz() {
-            const quiz = document.getElementById('quiz');
-            const questions = [
-                {
-                    q: "Hum pehli baar kahan mile?",
-                    options: ["Instagram", "TikTok", "Facebook", "Real life"],
-                    correct: 1
-                },
-                {
-                    q: "Pehla special naam jo maine tumhe diya?",
-                    options: ["Baby", "Meri Jan", "Jaanu", "Sweetie"],
-                    correct: 1
-                },
-                {
-                    q: "Hamara gaana kaunsa hai?",
-                    options: ["Ishq Mubarak", "Tum Hi Ho", "Perfect", "Teri Meri"],
-                    correct: 0
-                },
-                {
-                    q: "Special moment kahan tha?",
-                    options: ["Beach", "Indus Hotel", "Park", "Restaurant"],
-                    correct: 1
-                },
-                {
-                    q: "Maine tumse kya wada kiya?",
-                    options: ["Kabhi nahi chorunga", "Gifts dunga", "Sath ghumenge", "Roz call karunga"],
-                    correct: 0
-                }
-            ];
-
-            questions.forEach((q, index) => {
-                let div = document.createElement('div');
-                div.innerHTML = `
-                    <div class="quiz-question">${index+1}. ${q.q}</div>
-                    <div class="quiz-options" id="quiz-${index}">
-                        ${q.options.map((opt, i) => <button class="quiz-option" onclick="checkAnswer(this, ${i}, ${q.correct}, ${index})">${opt}</button>).join('')}
-                    </div>
-                `;
-                quiz.appendChild(div);
-            });
-        }
-
-        function checkAnswer(btn, selected, correct, qIndex) {
-            const options = document.querySelectorAll(#quiz-${qIndex} .quiz-option);
-            options.forEach(opt => opt.disabled = true);
-            
-            if(selected === correct) {
-                btn.classList.add('correct');
-                alert('Sahi jawab! ❤️');
-            } else {
-                btn.classList.add('wrong');
-                options[correct].classList.add('correct');
-                alert('Thoda sa galat... but I still love you 💕');
-            }
-        }
-
-        // Load Open When Letters
-        function loadOpenWhen() {
-            const container = document.getElementById('openWhenContainer');
-            const letters = [
-                {
-                    title: "Open When You Miss Me",
-                    message: "I miss you too, meri jan. Every second. Close your eyes — I'm sending you the biggest hug and a kiss on your forehead. I'm always with you, even when apart. 💕"
-                },
-                {
-                    title: "Open When You're Sad",
-                    message: "Wipe those tears, my love. Whatever is making you sad, remember — you have me. Always. I'm here to hold you, even if it's just through these words. You're stronger than you know, and I'm right here. 🥺🫂"
-                },
-                {
-                    title: "Open When You're Happy",
-                    message: "This is my favorite version of you. Your happiness is my happiness. Keep smiling like this forever — it's the most beautiful thing in the world. 😊💫"
-                },
-                {
-                    title: "Open When You Can't Sleep",
-                    message: "Close your eyes, meri jan. Imagine my arms wrapped around you, my heartbeat against your ear. Let that warmth carry you to sleep. I'm with you in your dreams. Goodnight, my love. 🌙✨"
-                },
-                {
-                    title: "Open When You're Angry At Me",
-                    message: "I'm sorry if I messed up. Whatever I did, let's talk about it. You mean too much to me to let anger come between us. I love you, and I'm here to fix it. Always. 🫂❤️"
-                },
-                {
-                    title: "Open When You Need to Feel Loved",
-                    message: "You are loved. More than words can say. More than this screen can show. You're my everything, Azra. My first thought, my last prayer, my home. Never doubt that for a second. 💖"
-                }
-            ];
-
-            letters.forEach(letter => {
-                let card = document.createElement('div');
-                card.className = 'open-when-card';
-                card.innerHTML = `
-                    <div onclick="openLetter(this, '${letter.message}')">💌 ${letter.title}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openLetter(element, message) {
-            if(!element.parentElement.classList.contains('open')) {
-                element.parentElement.classList.add('open');
-                element.innerHTML = 💝 ${message};
-            }
-        }
-
-        // Load Vouchers
+        // Load vouchers
         function loadVouchers() {
-            const container = document.getElementById('vouchersContainer');
+            const container = document.getElementById('vouchersList');
+            if (!container) return;
             const vouchers = [
-                {
-                    title: "🌿 Nature Escape",
-                    desc: "Redeem for one trip anywhere — just us, silence, and nature speaking for us. No words needed, just peace together."
-                },
-                {
-                    title: "🥺 Arms & Hair Time",
-                    desc: "Redeem for unlimited time in your arms with your hands in my hair. Nothing else matters. Just this moment, forever."
-                },
-                {
-                    title: "💍 Forever With You",
-                    desc: "The biggest dream. Redeem this for a lifetime — me marrying you, meri jan. One day, insha'Allah."
-                }
+                { title: "🌿 Nature Escape", desc: "Redeem for one trip anywhere — just us, silence, and nature speaking for us." },
+                { title: "🥺 Arms & Hair Time", desc: "Redeem for unlimited time in your arms with your hands in my hair." },
+                { title: "💍 Forever With You", desc: "The biggest dream. Redeem this for a lifetime — me marrying you." }
             ];
-
-            vouchers.forEach(voucher => {
+            vouchers.forEach(v => {
                 let div = document.createElement('div');
-                div.className = 'voucher';
-                div.innerHTML = `
-                    <h3>${voucher.title}</h3>
-                    <p>${voucher.desc}</p>
-                    <button class="redeem" onclick="this.innerText='Redeemed! 💝'; this.disabled=true">Redeem</button>
-                `;
+                div.style.background = 'rgba(255,255,255,0.1)';
+                div.style.padding = '15px';
+                div.style.margin = '10px 0';
+                div.style.borderRadius = '15px';
+                div.innerHTML = <h3>${v.title}</h3><p>${v.desc}</p>;
                 container.appendChild(div);
             });
         }
 
-        // Load Playlist
+        // Load playlist
         function loadPlaylist() {
-            const container = document.getElementById('playlistContainer');
+            const container = document.getElementById('playlistItems');
+            if (!container) return;
             const songs = [
-                { title: "Ishq Mubarak", artist: "Arijit Singh" },
-                { title: "Tum Hi Ho", artist: "Arijit Singh" },
-                { title: "Raabta", artist: "Arikit Singh" },
-                { title: "Humsafar", artist: "Akhil Sachdeva" },
-                { title: "Tera Zikr", artist: "Darshan Raval" }
+                "Ishq Mubarak – Arijit Singh",
+                "Tum Hi Ho – Arijit Singh",
+                "Raabta – Arikit Singh",
+                "Humsafar – Akhil Sachdeva",
+                "Tera Zikr – Darshan Raval"
             ];
-
-            songs.forEach((song, i) => {
-                let div = document.createElement('div');
-                div.className = 'song-item';
-                div.innerHTML = `
-                    <div class="song-number">${i+1}</div>
-                    <div class="song-info">
-                        <div class="song-title">${song.title}</div>
-                        <div class="song-artist">${song.artist}</div>
-                    </div>
-                `;
-                container.appendChild(div);
+            songs.forEach((s, i) => {
+                let p = document.createElement('p');
+                p.innerHTML = ${i+1}. ${s};
+                p.style.margin = '8px 0';
+                container.appendChild(p);
             });
-        }
-
-        // Gift Box
-        function openGift(element) {
-            element.classList.toggle('open');
-            if(element.classList.contains('open')) {
-                element.innerHTML = '<span>🎁</span>';
-                document.getElementById('giftContent').style.display = 'block';
-            } else {
-                element.innerHTML = '<span>🎀</span>';
-                document.getElementById('giftContent').style.display = 'none';
-            }
-        }
-
-        // Draw Constellation
-        function drawConstellation() {
-            const canvas = document.getElementById('constellation');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for(let i = 0; i < 100; i++) {
-                ctx.beginPath();
-                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 2, 0, 2 * Math.PI);
-                ctx.fillStyle = 'white';
-                ctx.fill();
-            }
-            
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2, canvas.height/2 - 30);
-            ctx.bezierCurveTo(canvas.width/2 - 50, canvas.height/2 - 80, canvas.width/2 - 80, canvas.height/2 + 20, canvas.width/2, canvas.height/2 + 50);
-            ctx.bezierCurveTo(canvas.width/2 + 80, canvas.height/2 + 20, canvas.width/2 + 50, canvas.height/2 - 80, canvas.width/2, canvas.height/2 - 30);
-            ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            ctx.font = '20px Arial';
-            ctx.fillStyle = 'white';
-            ctx.fillText('6 June 2004', canvas.width/2 - 70, canvas.height - 20);
         }
 
         // Candle
-        function blowCandle(element) {
-            element.innerHTML = '💨';
+        function blowCandle(el) {
+            el.innerHTML = '💨';
             document.getElementById('wishMessage').innerHTML = 'All your dreams come true meri jan ❤️';
         }
+
+        // Close modals if clicked outside the card
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        };
     </script>
 </body>
 </html>
