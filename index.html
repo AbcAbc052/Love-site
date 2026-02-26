@@ -908,346 +908,350 @@
     </div>
 
     <script>
-        // Password Protection
-        function checkPassword() {
-            let pwd = document.getElementById('passwordInput').value;
-            if(pwd === '04032004') {
-                document.getElementById('passwordOverlay').style.display = 'none';
-                document.getElementById('floatingSignature').style.display = 'block';
-                document.getElementById('musicBtn').style.display = 'block';
-                document.querySelector('.container').style.display = 'block'; // show main container
-                startHearts();
-                loadGallery();
-                loadReasons();
-                loadQuiz();
-                loadOpenWhen();
-                loadVouchers();
-                loadPlaylist();
-                drawConstellation();
-            } else {
-                alert('Galat password! Dobara koshish karo meri jan 💕');
-            }
-        }
-
-        // Floating Hearts
-        function startHearts() {
-            setInterval(createHeart, 300);
-        }
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            document.getElementById('hearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
-        }
-
-        // Countdown Timer
-        function updateCountdown() {
-            const birthday = new Date('March 4, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = birthday - now;
-            
-            if(diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            } else {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-            }
-        }
+    // Password Protection - Simplified
+    function checkPassword() {
+        let pwd = document.getElementById('passwordInput').value.trim(); // remove spaces
+        let correctPwd = '04032004';
         
-        setInterval(updateCountdown, 1000);
-
-        // Music Control
-        let music = new Audio();
-        // Replace with actual audio file or YouTube embed. Using a placeholder.
-        music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // temporary audio
-        music.loop = true;
+        // Debug alert (remove later)
+        alert('Entered: ' + pwd + ' | Expected: ' + correctPwd);
         
-        function toggleMusic() {
-            if(music.paused) {
-                music.play();
-                document.getElementById('musicBtn').innerHTML = '⏸️';
-            } else {
-                music.pause();
-                document.getElementById('musicBtn').innerHTML = '🎵';
+        if(pwd === correctPwd) {
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('floatingSignature').style.display = 'block';
+            document.getElementById('musicBtn').style.display = 'block';
+            document.getElementById('mainContainer').style.display = 'block'; // use ID, not class
+            startHearts();
+            loadGallery();
+            loadReasons();
+            loadQuiz();
+            loadOpenWhen();
+            loadVouchers();
+            loadPlaylist();
+            drawConstellation();
+        } else {
+            alert('Galat password! Dobara koshish karo meri jan 💕');
+        }
+    }
+
+    // Floating Hearts
+    function startHearts() {
+        setInterval(createHeart, 300);
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        document.getElementById('hearts').appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    // Countdown Timer
+    function updateCountdown() {
+        const birthday = new Date('March 4, 2025 00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = birthday - now;
+        
+        if(diff > 0) {
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        } else {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+        }
+    }
+    
+    setInterval(updateCountdown, 1000);
+
+    // Music Control
+    let music = new Audio();
+    // Replace with your actual audio file or a working URL
+    music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+    music.loop = true;
+    
+    function toggleMusic() {
+        if(music.paused) {
+            music.play();
+            document.getElementById('musicBtn').innerHTML = '⏸️';
+        } else {
+            music.pause();
+            document.getElementById('musicBtn').innerHTML = '🎵';
+        }
+    }
+
+    // Hidden Surprise
+    function revealSurprise() {
+        document.getElementById('hiddenMessage').style.display = 'block';
+    }
+
+    // Load Gallery
+    function loadGallery() {
+        const gallery = document.getElementById('galleryGrid');
+        for(let i = 1; i <= 10; i++) {
+            let item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <img src="photo${i}.jpg" alt="Memory ${i}" onerror="this.src='https://via.placeholder.com/300x300/ff758c/ffffff?text=Azu+❤️+${i}'">
+                <div class="caption">Humari yaadein 🥺</div>
+            `;
+            gallery.appendChild(item);
+        }
+    }
+
+    // Load Reasons
+    function loadReasons() {
+        const reasons = document.getElementById('reasonsList');
+        const reasonsList = [
+            'Your smile that lights up my world',
+            'The way you laugh — it\'s pure magic',
+            'Your eyes — I get lost in them',
+            'Your voice — it calms me down',
+            'The way you say "Meri Jan"',
+            'You understand me without words',
+            'You make even ordinary days special',
+            'You believe in me when I doubt myself',
+            'You feel like home',
+            'You complete me',
+            'The way you get shy',
+            'Your random texts that make my day',
+            'How you care about small things',
+            'Your stubbornness (I secretly love it)',
+            'The way you say my name',
+            'You accepted me for who I am',
+            'You\'re my peace in chaos',
+            'You\'re my first thought in the morning',
+            'You\'re my last thought at night',
+            'You made me believe in love',
+            'The way your eyes sparkle when you\'re happy',
+            'How you always know when something is wrong',
+            'The little sounds you make when you\'re excited',
+            'Your hugs — they fix everything',
+            'You exist. That\'s enough.'
+        ];
+        
+        reasonsList.forEach((reason, i) => {
+            let card = document.createElement('div');
+            card.className = 'reason-card';
+            card.innerHTML = ${i+1}. ${reason};
+            reasons.appendChild(card);
+        });
+    }
+
+    // Load Quiz
+    function loadQuiz() {
+        const quiz = document.getElementById('quiz');
+        const questions = [
+            {
+                q: "Hum pehli baar kahan mile?",
+                options: ["Instagram", "TikTok", "Facebook", "Real life"],
+                correct: 1
+            },
+            {
+                q: "Pehla special naam jo maine tumhe diya?",
+                options: ["Baby", "Meri Jan", "Jaanu", "Sweetie"],
+                correct: 1
+            },
+            {
+                q: "Hamara gaana kaunsa hai?",
+                options: ["Ishq Mubarak", "Tum Hi Ho", "Perfect", "Teri Meri"],
+                correct: 0
+            },
+            {
+                q: "Special moment kahan tha?",
+                options: ["Beach", "Indus Hotel", "Park", "Restaurant"],
+                correct: 1
+            },
+            {
+                q: "Maine tumse kya wada kiya?",
+                options: ["Kabhi nahi chorunga", "Gifts dunga", "Sath ghumenge", "Roz call karunga"],
+                correct: 0
             }
-        }
+        ];
 
-        // Hidden Surprise
-        function revealSurprise() {
-            document.getElementById('hiddenMessage').style.display = 'block';
-        }
+        questions.forEach((q, index) => {
+            let div = document.createElement('div');
+            div.innerHTML = `
+                <div class="quiz-question">${index+1}. ${q.q}</div>
+                <div class="quiz-options" id="quiz-${index}">
+                    ${q.options.map((opt, i) => <button class="quiz-option" onclick="checkAnswer(this, ${i}, ${q.correct}, ${index})">${opt}</button>).join('')}
+                </div>
+            `;
+            quiz.appendChild(div);
+        });
+    }
 
-        // Load Gallery
-        function loadGallery() {
-            const gallery = document.getElementById('galleryGrid');
-            for(let i = 1; i <= 10; i++) {
-                let item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `
-                    <img src="photo${i}.jpg" alt="Memory ${i}" onerror="this.src='https://via.placeholder.com/300x300/ff758c/ffffff?text=Azu+❤️+${i}'">
-                    <div class="caption">Humari yaadein 🥺</div>
-                `;
-                gallery.appendChild(item);
+    function checkAnswer(btn, selected, correct, qIndex) {
+        const options = document.querySelectorAll(#quiz-${qIndex} .quiz-option);
+        options.forEach(opt => opt.disabled = true);
+        
+        if(selected === correct) {
+            btn.classList.add('correct');
+            alert('Sahi jawab! ❤️');
+        } else {
+            btn.classList.add('wrong');
+            options[correct].classList.add('correct');
+            alert('Thoda sa galat... but I still love you 💕');
+        }
+    }
+
+    // Load Open When Letters
+    function loadOpenWhen() {
+        const container = document.getElementById('openWhenContainer');
+        const letters = [
+            {
+                title: "Open When You Miss Me",
+                message: "I miss you too, meri jan. Every second. Close your eyes — I'm sending you the biggest hug and a kiss on your forehead. I'm always with you, even when apart. 💕"
+            },
+            {
+                title: "Open When You're Sad",
+                message: "Wipe those tears, my love. Whatever is making you sad, remember — you have me. Always. I'm here to hold you, even if it's just through these words. You're stronger than you know, and I'm right here. 🥺🫂"
+            },
+            {
+                title: "Open When You're Happy",
+                message: "This is my favorite version of you. Your happiness is my happiness. Keep smiling like this forever — it's the most beautiful thing in the world. 😊💫"
+            },
+            {
+                title: "Open When You Can't Sleep",
+                message: "Close your eyes, meri jan. Imagine my arms wrapped around you, my heartbeat against your ear. Let that warmth carry you to sleep. I'm with you in your dreams. Goodnight, my love. 🌙✨"
+            },
+            {
+                title: "Open When You're Angry At Me",
+                message: "I'm sorry if I messed up. Whatever I did, let's talk about it. You mean too much to me to let anger come between us. I love you, and I'm here to fix it. Always. 🫂❤️"
+            },
+            {
+                title: "Open When You Need to Feel Loved",
+                message: "You are loved. More than words can say. More than this screen can show. You're my everything, Azra. My first thought, my last prayer, my home. Never doubt that for a second. 💖"
             }
+        ];
+
+        letters.forEach(letter => {
+            let card = document.createElement('div');
+            card.className = 'open-when-card';
+            card.innerHTML = `
+                <div onclick="openLetter(this, '${letter.message}')">💌 ${letter.title}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function openLetter(element, message) {
+        if(!element.parentElement.classList.contains('open')) {
+            element.parentElement.classList.add('open');
+            element.innerHTML = 💝 ${message};
         }
+    }
 
-        // Load Reasons
-        function loadReasons() {
-            const reasons = document.getElementById('reasonsList');
-            const reasonsList = [
-                'Your smile that lights up my world',
-                'The way you laugh — it\'s pure magic',
-                'Your eyes — I get lost in them',
-                'Your voice — it calms me down',
-                'The way you say "Meri Jan"',
-                'You understand me without words',
-                'You make even ordinary days special',
-                'You believe in me when I doubt myself',
-                'You feel like home',
-                'You complete me',
-                'The way you get shy',
-                'Your random texts that make my day',
-                'How you care about small things',
-                'Your stubbornness (I secretly love it)',
-                'The way you say my name',
-                'You accepted me for who I am',
-                'You\'re my peace in chaos',
-                'You\'re my first thought in the morning',
-                'You\'re my last thought at night',
-                'You made me believe in love',
-                'The way your eyes sparkle when you\'re happy',
-                'How you always know when something is wrong',
-                'The little sounds you make when you\'re excited',
-                'Your hugs — they fix everything',
-                'You exist. That\'s enough.'
-            ];
-            
-            reasonsList.forEach((reason, i) => {
-                let card = document.createElement('div');
-                card.className = 'reason-card';
-                card.innerHTML = ${i+1}. ${reason};
-                reasons.appendChild(card);
-            });
-        }
-
-        // Load Quiz
-        function loadQuiz() {
-            const quiz = document.getElementById('quiz');
-            const questions = [
-                {
-                    q: "Hum pehli baar kahan mile?",
-                    options: ["Instagram", "TikTok", "Facebook", "Real life"],
-                    correct: 1
-                },
-                {
-                    q: "Pehla special naam jo maine tumhe diya?",
-                    options: ["Baby", "Meri Jan", "Jaanu", "Sweetie"],
-                    correct: 1
-                },
-                {
-                    q: "Hamara gaana kaunsa hai?",
-                    options: ["Ishq Mubarak", "Tum Hi Ho", "Perfect", "Teri Meri"],
-                    correct: 0
-                },
-                {
-                    q: "Special moment kahan tha?",
-                    options: ["Beach", "Indus Hotel", "Park", "Restaurant"],
-                    correct: 1
-                },
-                {
-                    q: "Maine tumse kya wada kiya?",
-                    options: ["Kabhi nahi chorunga", "Gifts dunga", "Sath ghumenge", "Roz call karunga"],
-                    correct: 0
-                }
-            ];
-
-            questions.forEach((q, index) => {
-                let div = document.createElement('div');
-                div.innerHTML = `
-                    <div class="quiz-question">${index+1}. ${q.q}</div>
-                    <div class="quiz-options" id="quiz-${index}">
-                        ${q.options.map((opt, i) => <button class="quiz-option" onclick="checkAnswer(this, ${i}, ${q.correct}, ${index})">${opt}</button>).join('')}
-                    </div>
-                `;
-                quiz.appendChild(div);
-            });
-        }
-
-        function checkAnswer(btn, selected, correct, qIndex) {
-            const options = document.querySelectorAll(#quiz-${qIndex} .quiz-option);
-            options.forEach(opt => opt.disabled = true);
-            
-            if(selected === correct) {
-                btn.classList.add('correct');
-                alert('Sahi jawab! ❤️');
-            } else {
-                btn.classList.add('wrong');
-                options[correct].classList.add('correct');
-                alert('Thoda sa galat... but I still love you 💕');
+    // Load Vouchers
+    function loadVouchers() {
+        const container = document.getElementById('vouchersContainer');
+        const vouchers = [
+            {
+                title: "🌿 Nature Escape",
+                desc: "Redeem for one trip anywhere — just us, silence, and nature speaking for us. No words needed, just peace together."
+            },
+            {
+                title: "🥺 Arms & Hair Time",
+                desc: "Redeem for unlimited time in your arms with your hands in my hair. Nothing else matters. Just this moment, forever."
+            },
+            {
+                title: "💍 Forever With You",
+                desc: "The biggest dream. Redeem this for a lifetime — me marrying you, meri jan. One day, insha'Allah."
             }
+        ];
+
+        vouchers.forEach(voucher => {
+            let div = document.createElement('div');
+            div.className = 'voucher';
+            div.innerHTML = `
+                <h3>${voucher.title}</h3>
+                <p>${voucher.desc}</p>
+                <button class="redeem" onclick="this.innerText='Redeemed! 💝'; this.disabled=true">Redeem</button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    // Load Playlist
+    function loadPlaylist() {
+        const container = document.getElementById('playlistContainer');
+        const songs = [
+            { title: "Ishq Mubarak", artist: "Arijit Singh" },
+            { title: "Tum Hi Ho", artist: "Arijit Singh" },
+            { title: "Raabta", artist: "Arikit Singh" },
+            { title: "Humsafar", artist: "Akhil Sachdeva" },
+            { title: "Tera Zikr", artist: "Darshan Raval" }
+        ];
+
+        songs.forEach((song, i) => {
+            let div = document.createElement('div');
+            div.className = 'song-item';
+            div.innerHTML = `
+                <div class="song-number">${i+1}</div>
+                <div class="song-info">
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-artist">${song.artist}</div>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    // Gift Box
+    function openGift(element) {
+        element.classList.toggle('open');
+        if(element.classList.contains('open')) {
+            element.innerHTML = '<span>🎁</span>';
+            document.getElementById('giftContent').style.display = 'block';
+        } else {
+            element.innerHTML = '<span>🎀</span>';
+            document.getElementById('giftContent').style.display = 'none';
         }
+    }
 
-        // Load Open When Letters
-        function loadOpenWhen() {
-            const container = document.getElementById('openWhenContainer');
-            const letters = [
-                {
-                    title: "Open When You Miss Me",
-                    message: "I miss you too, meri jan. Every second. Close your eyes — I'm sending you the biggest hug and a kiss on your forehead. I'm always with you, even when apart. 💕"
-                },
-                {
-                    title: "Open When You're Sad",
-                    message: "Wipe those tears, my love. Whatever is making you sad, remember — you have me. Always. I'm here to hold you, even if it's just through these words. You're stronger than you know, and I'm right here. 🥺🫂"
-                },
-                {
-                    title: "Open When You're Happy",
-                    message: "This is my favorite version of you. Your happiness is my happiness. Keep smiling like this forever — it's the most beautiful thing in the world. 😊💫"
-                },
-                {
-                    title: "Open When You Can't Sleep",
-                    message: "Close your eyes, meri jan. Imagine my arms wrapped around you, my heartbeat against your ear. Let that warmth carry you to sleep. I'm with you in your dreams. Goodnight, my love. 🌙✨"
-                },
-                {
-                    title: "Open When You're Angry At Me",
-                    message: "I'm sorry if I messed up. Whatever I did, let's talk about it. You mean too much to me to let anger come between us. I love you, and I'm here to fix it. Always. 🫂❤️"
-                },
-                {
-                    title: "Open When You Need to Feel Loved",
-                    message: "You are loved. More than words can say. More than this screen can show. You're my everything, Azra. My first thought, my last prayer, my home. Never doubt that for a second. 💖"
-                }
-            ];
-
-            letters.forEach(letter => {
-                let card = document.createElement('div');
-                card.className = 'open-when-card';
-                card.innerHTML = `
-                    <div onclick="openLetter(this, '${letter.message}')">💌 ${letter.title}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openLetter(element, message) {
-            if(!element.parentElement.classList.contains('open')) {
-                element.parentElement.classList.add('open');
-                element.innerHTML = 💝 ${message};
-            }
-        }
-
-        // Load Vouchers
-        function loadVouchers() {
-            const container = document.getElementById('vouchersContainer');
-            const vouchers = [
-                {
-                    title: "🌿 Nature Escape",
-                    desc: "Redeem for one trip anywhere — just us, silence, and nature speaking for us. No words needed, just peace together."
-                },
-                {
-                    title: "🥺 Arms & Hair Time",
-                    desc: "Redeem for unlimited time in your arms with your hands in my hair. Nothing else matters. Just this moment, forever."
-                },
-                {
-                    title: "💍 Forever With You",
-                    desc: "The biggest dream. Redeem this for a lifetime — me marrying you, meri jan. One day, insha'Allah."
-                }
-            ];
-
-            vouchers.forEach(voucher => {
-                let div = document.createElement('div');
-                div.className = 'voucher';
-                div.innerHTML = `
-                    <h3>${voucher.title}</h3>
-                    <p>${voucher.desc}</p>
-                    <button class="redeem" onclick="this.innerText='Redeemed! 💝'; this.disabled=true">Redeem</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Load Playlist
-        function loadPlaylist() {
-            const container = document.getElementById('playlistContainer');
-            const songs = [
-                { title: "Ishq Mubarak", artist: "Arijit Singh" },
-                { title: "Tum Hi Ho", artist: "Arijit Singh" },
-                { title: "Raabta", artist: "Arikit Singh" },
-                { title: "Humsafar", artist: "Akhil Sachdeva" },
-                { title: "Tera Zikr", artist: "Darshan Raval" }
-            ];
-
-            songs.forEach((song, i) => {
-                let div = document.createElement('div');
-                div.className = 'song-item';
-                div.innerHTML = `
-                    <div class="song-number">${i+1}</div>
-                    <div class="song-info">
-                        <div class="song-title">${song.title}</div>
-                        <div class="song-artist">${song.artist}</div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Gift Box
-        function openGift(element) {
-            element.classList.toggle('open');
-            if(element.classList.contains('open')) {
-                element.innerHTML = '<span>🎁</span>';
-                document.getElementById('giftContent').style.display = 'block';
-            } else {
-                element.innerHTML = '<span>🎀</span>';
-                document.getElementById('giftContent').style.display = 'none';
-            }
-        }
-
-        // Draw Constellation
-        function drawConstellation() {
-            const canvas = document.getElementById('constellation');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw stars
-            for(let i = 0; i < 100; i++) {
-                ctx.beginPath();
-                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 2, 0, 2 * Math.PI);
-                ctx.fillStyle = 'white';
-                ctx.fill();
-            }
-            
-            // Draw heart constellation
+    // Draw Constellation
+    function drawConstellation() {
+        const canvas = document.getElementById('constellation');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for(let i = 0; i < 100; i++) {
             ctx.beginPath();
-            ctx.moveTo(canvas.width/2, canvas.height/2 - 30);
-            ctx.bezierCurveTo(canvas.width/2 - 50, canvas.height/2 - 80, canvas.width/2 - 80, canvas.height/2 + 20, canvas.width/2, canvas.height/2 + 50);
-            ctx.bezierCurveTo(canvas.width/2 + 80, canvas.height/2 + 20, canvas.width/2 + 50, canvas.height/2 - 80, canvas.width/2, canvas.height/2 - 30);
-            ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Add date
-            ctx.font = '20px Arial';
+            ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 2, 0, 2 * Math.PI);
             ctx.fillStyle = 'white';
-            ctx.fillText('6 June 2004', canvas.width/2 - 70, canvas.height - 20);
+            ctx.fill();
         }
+        
+        ctx.beginPath();
+        ctx.moveTo(canvas.width/2, canvas.height/2 - 30);
+        ctx.bezierCurveTo(canvas.width/2 - 50, canvas.height/2 - 80, canvas.width/2 - 80, canvas.height/2 + 20, canvas.width/2, canvas.height/2 + 50);
+        ctx.bezierCurveTo(canvas.width/2 + 80, canvas.height/2 + 20, canvas.width/2 + 50, canvas.height/2 - 80, canvas.width/2, canvas.height/2 - 30);
+        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
-        // Candle
-        function blowCandle(element) {
-            element.innerHTML = '💨';
-            document.getElementById('wishMessage').innerHTML = 'All your dreams come true meri jan ❤️';
-        }
-    </script>
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText('6 June 2004', canvas.width/2 - 70, canvas.height - 20);
+    }
+
+    // Candle
+    function blowCandle(element) {
+        element.innerHTML = '💨';
+        document.getElementById('wishMessage').innerHTML = 'All your dreams come true meri jan ❤️';
+    }
+</script>
 </body>
 </html>
+
