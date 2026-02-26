@@ -57,6 +57,7 @@
             padding: 20px;
             position: relative;
             z-index: 2;
+            display: none; /* initially hidden */
         }
 
         /* Password Protection */
@@ -79,6 +80,8 @@
             border-radius: 20px;
             text-align: center;
             color: #333;
+            max-width: 90%;
+            width: 400px;
         }
 
         .password-box h2 {
@@ -93,6 +96,7 @@
             border: 2px solid #ff758c;
             border-radius: 5px;
             outline: none;
+            font-size: 1rem;
         }
 
         .password-box button {
@@ -103,6 +107,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            transition: background 0.3s;
         }
 
         .password-box button:hover {
@@ -652,7 +657,7 @@
             transform: scale(1.2);
         }
 
-        /* Floating Signature */
+        /* Floating Signature (unique ID) */
         .floating-signature {
             position: fixed;
             bottom: 20px;
@@ -665,6 +670,7 @@
             z-index: 100;
             border: 2px solid white;
             animation: float-sig 3s infinite;
+            display: none;
         }
 
         @keyframes float-sig {
@@ -711,16 +717,16 @@
         </div>
     </div>
 
-    <!-- Floating Signature -->
-    <div class="floating-signature" id="mainContent" style="display: none;">
+    <!-- Floating Signature (unique ID) -->
+    <div class="floating-signature" id="floatingSignature">
         I Love Meri Jann 😘
     </div>
 
-    <!-- Music Button -->
+    <!-- Music Button (initially hidden) -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()" style="display: none;">🎵</button>
 
-    <!-- Main Content -->
-    <div class="container" id="mainContent" style="display: none;">
+    <!-- Main Content Container -->
+    <div class="container" id="mainContainer">
         <!-- Hero Section -->
         <section class="hero">
             <h1>Azra ❤️</h1>
@@ -907,9 +913,9 @@
             let pwd = document.getElementById('passwordInput').value;
             if(pwd === '04032004') {
                 document.getElementById('passwordOverlay').style.display = 'none';
-                document.querySelector('.floating-signature').style.display = 'block';
+                document.getElementById('floatingSignature').style.display = 'block';
                 document.getElementById('musicBtn').style.display = 'block';
-                document.getElementById('mainContent').style.display = 'block';
+                document.querySelector('.container').style.display = 'block'; // show main container
                 startHearts();
                 loadGallery();
                 loadReasons();
@@ -965,7 +971,8 @@
 
         // Music Control
         let music = new Audio();
-        music.src = 'https://www.youtube.com/watch?v=5W9F1zP7i_0'; // Ishq Mubarak
+        // Replace with actual audio file or YouTube embed. Using a placeholder.
+        music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // temporary audio
         music.loop = true;
         
         function toggleMusic() {
