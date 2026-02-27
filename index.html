@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azra's Digital Gift 🎁</title>
+    <title>Azra's Heart Gift 🎁</title>
     <style>
         * {
             margin: 0;
@@ -12,24 +12,26 @@
         }
 
         body {
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: #0a0f1e;
-            color: #fff;
+            color: white;
             height: 100vh;
-            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
             position: relative;
         }
 
-        /* Binary rain background (tech vibe) */
+        /* Binary rain background */
         #binary-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            opacity: 0.1;
             pointer-events: none;
-            opacity: 0.15;
             z-index: 1;
         }
 
@@ -37,144 +39,177 @@
         .container {
             position: relative;
             z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
-        }
-
-        /* Gift box (clickable) */
-        .gift-wrapper {
             text-align: center;
-            cursor: pointer;
-            z-index: 20;
+            width: 100%;
         }
 
-        .gift-box {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(145deg, #ff4d6d, #c9184a);
-            border-radius: 30px 30px 15px 15px;
+        /* ========== HEART GIFT BOX ========== */
+        .gift-wrapper {
             position: relative;
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.6), 0 0 30px #ff4d6d;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            z-index: 20;
+            animation: floatHeart 3s ease-in-out infinite;
         }
 
-        .gift-box::before {
+        .heart-box {
+            position: relative;
+            width: 300px;
+            height: 270px;
+            background: linear-gradient(145deg, #ff4d6d, #c9184a);
+            transform: rotate(-45deg);
+            border-radius: 50% 50% 0 50%;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.8), 0 0 30px #ffb3c6;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .heart-box::before,
+        .heart-box::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 30px;
-            background: #ffb3c6;
-            top: 50%;
-            transform: translateY(-50%);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            z-index: 2;
+            width: 300px;
+            height: 270px;
+            background: inherit;
+            border-radius: 50% 50% 0 50%;
+            box-shadow: inherit;
         }
 
-        .gift-box::after {
+        .heart-box::before {
+            top: -135px;
+            left: 0;
+            border-radius: 50% 50% 50% 0;
+        }
+
+        .heart-box::after {
+            left: 135px;
+            top: 0;
+            border-radius: 50% 0 50% 50%;
+        }
+
+        /* Ribbon */
+        .heart-ribbon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 120px;
+            height: 30px;
+            background: #ffb3c6;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #fff;
+            z-index: 25;
+        }
+
+        .heart-ribbon::before,
+        .heart-ribbon::after {
             content: '';
             position: absolute;
             width: 30px;
-            height: 100%;
+            height: 120px;
             background: #ffb3c6;
+            border-radius: 20px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 5px 0 10px rgba(0,0,0,0.2);
-            z-index: 2;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #fff;
         }
 
-        .gift-lid {
-            width: 320px;
-            height: 60px;
-            background: linear-gradient(145deg, #ff758c, #ff4d6d);
-            border-radius: 30px 30px 0 0;
+        .heart-ribbon::before { transform: translate(-50%, -50%) rotate(90deg); }
+        .heart-ribbon::after { transform: translate(-50%, -50%) rotate(0deg); }
+
+        /* Flowers */
+        .flower {
             position: absolute;
-            top: -30px;
-            left: -10px;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-            z-index: 5;
-            transition: transform 0.5s;
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px #ffb3c6);
+            animation: sway 4s ease-in-out infinite;
+            z-index: 15;
         }
 
-        .gift-lid.open {
-            transform: translateY(-100px) rotate(10deg);
+        .flower1 { top: -40px; left: -40px; animation-delay: 0s; }
+        .flower2 { top: -30px; right: -30px; animation-delay: 0.5s; }
+        .flower3 { bottom: -30px; left: -20px; animation-delay: 1s; }
+        .flower4 { bottom: -20px; right: -40px; animation-delay: 1.5s; }
+        .flower5 { top: 20px; left: -60px; animation-delay: 2s; }
+        .flower6 { top: 10px; right: -60px; animation-delay: 2.5s; }
+
+        @keyframes sway {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Opening animation */
+        .gift-wrapper.open {
+            animation: openHeart 0.8s forwards;
+        }
+
+        @keyframes openHeart {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
         }
 
         .gift-message {
             color: #ffb3c6;
             font-size: 1.3rem;
-            margin-top: 20px;
+            margin-top: 30px;
             text-shadow: 0 0 10px #ff4d6d;
-            letter-spacing: 1px;
+            position: relative;
+            z-index: 30;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Icons container (hidden until box opens) */
+        /* ========== ICONS CONTAINER ========== */
         .icons-container {
             display: none;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            gap: 25px;
-            max-width: 1000px;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 40px auto 0;
             padding: 20px;
-            opacity: 0;
-            animation: fadeIn 0.8s forwards;
-            margin-top: 40px;
-            z-index: 30;
         }
 
         .icon-item {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 77, 109, 0.5);
-            border-radius: 25px;
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #ff4d6d;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
+            box-shadow: 0 0 15px #ff4d6d;
         }
 
         .icon-item:hover {
+            background: #ff4d6d;
             transform: scale(1.1);
-            border-color: #ff4d6d;
-            box-shadow: 0 0 30px #ff4d6d;
-            background: rgba(255, 77, 109, 0.2);
         }
 
         .icon-item span {
             font-size: 3rem;
-            margin-bottom: 8px;
         }
 
         .icon-item p {
             font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffb3c6;
+            margin-top: 5px;
+            font-weight: bold;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        /* Modal styling */
+        /* ========== MODAL STYLES ========== */
         .modal {
             display: none;
             position: fixed;
@@ -190,99 +225,73 @@
         }
 
         .modal-card {
-            background: linear-gradient(145deg, #1e1f2b, #0f111a);
+            background: #1a1f35;
             border: 2px solid #ff4d6d;
-            border-radius: 40px;
-            padding: 35px;
-            max-width: 650px;
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
             color: white;
-            box-shadow: 0 20px 50px #ff4d6d;
+            box-shadow: 0 0 50px #ff4d6d;
             position: relative;
-            animation: modalPop 0.3s;
             width: 90%;
-        }
-
-        @keyframes modalPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 25px;
+            top: 15px;
+            right: 20px;
             font-size: 2.5rem;
             cursor: pointer;
             color: #ff4d6d;
-            transition: transform 0.2s;
-            line-height: 1;
         }
 
         .close-modal:hover {
-            transform: scale(1.2);
+            color: #ffb3c6;
         }
 
-        .modal-card h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+        h2 {
             color: #ffb3c6;
+            margin-bottom: 20px;
             border-bottom: 2px solid #ff4d6d;
             padding-bottom: 10px;
-        }
-
-        .modal-card .content {
-            font-size: 1.1rem;
-            line-height: 1.7;
         }
 
         /* Gallery grid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
         }
 
         .gallery-grid img {
             width: 100%;
-            border-radius: 15px;
+            border-radius: 10px;
             border: 2px solid #ff4d6d;
-            transition: transform 0.3s;
         }
 
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Reason cards (for reasons modal) */
+        /* Reason list */
         .reason-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .reason-item {
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 15px;
-            border-left: 4px solid #ff4d6d;
+            background: rgba(255,77,109,0.2);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.95rem;
         }
 
-        /* Voucher cards */
+        /* Voucher card */
         .voucher-card {
             background: rgba(255,77,109,0.1);
             border: 2px dashed #ff4d6d;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .voucher-card h3 {
-            color: #ffb3c6;
-            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
         }
 
         .redeem-btn {
@@ -291,57 +300,35 @@
             color: white;
             padding: 8px 20px;
             border-radius: 30px;
-            margin-top: 10px;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .redeem-btn:hover {
-            background: #ff1a4d;
-            transform: scale(1.05);
-        }
-
-        /* Playlist items */
+        /* Playlist item */
         .playlist-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
+            padding: 8px;
             border-bottom: 1px solid #ff4d6d;
         }
 
-        .playlist-number {
-            width: 40px;
+        /* Floating elements */
+        .floating-signature {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 1px solid #ff4d6d;
             color: #ffb3c6;
-            font-weight: bold;
+            z-index: 200;
         }
 
-        /* Candle */
-        .candle {
-            font-size: 6rem;
-            cursor: pointer;
-            animation: flicker 1.5s infinite;
-            text-align: center;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 20px orange; }
-            50% { opacity: 0.8; text-shadow: 0 0 40px orange; }
-        }
-
-        .wish-message {
-            font-size: 2rem;
-            margin-top: 20px;
-            color: #ffb3c6;
-        }
-
-        /* Music button */
         .music-btn {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 65px;
-            height: 65px;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: #ff4d6d;
             border: none;
@@ -350,53 +337,36 @@
             cursor: pointer;
             z-index: 200;
             box-shadow: 0 0 20px #ff4d6d;
-            transition: 0.3s;
-        }
-
-        .music-btn:hover {
-            transform: scale(1.15);
-        }
-
-        /* Floating signature */
-        .floating-signature {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            padding: 10px 22px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            border: 1px solid #ff4d6d;
-            z-index: 200;
-            color: #ffb3c6;
-            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
     <canvas id="binary-bg"></canvas>
 
-    <!-- Floating elements -->
     <div class="floating-signature">💻 I Love Meri Jann 😘</div>
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
-    <!-- Main container -->
-    <div class="container" id="container">
-        <!-- Gift box (initial view) -->
-        <div class="gift-wrapper" id="giftWrapper">
-            <div class="gift-box" id="giftBox">
-                <div class="gift-lid" id="giftLid"></div>
+    <div class="container">
+        <!-- Heart gift box with flowers -->
+        <div class="gift-wrapper" id="giftWrapper" onclick="openGift()">
+            <div class="heart-box" id="heartBox">
+                <div class="heart-ribbon"></div>
             </div>
-            <div class="gift-message">Click to open your gift from your IT Boy 💻❤️</div>
+            <!-- Surrounding flowers -->
+            <div class="flower flower1">🌸</div>
+            <div class="flower flower2">🌼</div>
+            <div class="flower flower3">🌺</div>
+            <div class="flower flower4">🌹</div>
+            <div class="flower flower5">🌷</div>
+            <div class="flower flower6">🌸</div>
+            <div class="gift-message">Click to open your heart gift 💝</div>
         </div>
 
-        <!-- Icons container (hidden initially) -->
+        <!-- 21 Icons (all elements + final surprise) -->
         <div class="icons-container" id="iconsContainer">
-            <!-- 20 icons for 20 elements -->
-            <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Love Letter</p></div>
+            <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Letter</p></div>
             <div class="icon-item" onclick="openModal('gallery')"><span>📸</span><p>Gallery</p></div>
-            <div class="icon-item" onclick="openModal('reasons')"><span>💖</span><p>25 Reasons</p></div>
+            <div class="icon-item" onclick="openModal('reasons')"><span>💖</span><p>Reasons</p></div>
             <div class="icon-item" onclick="openModal('promise')"><span>🤝</span><p>Promise</p></div>
             <div class="icon-item" onclick="openModal('vouchers')"><span>🎟️</span><p>Vouchers</p></div>
             <div class="icon-item" onclick="openModal('poem')"><span>📝</span><p>Poem</p></div>
@@ -414,22 +384,24 @@
             <div class="icon-item" onclick="openModal('scrapbook')"><span>📔</span><p>Scrapbook</p></div>
             <div class="icon-item" onclick="openModal('heart')"><span>❤️</span><p>Heart</p></div>
             <div class="icon-item" onclick="openModal('signature')"><span>✍️</span><p>Note</p></div>
+            <!-- New 21st element: final surprise -->
+            <div class="icon-item" onclick="openModal('last')"><span>💬</span><p>Say Something</p></div>
         </div>
     </div>
 
-    <!-- ==================== MODALS (20 of them) ==================== -->
-    <!-- Love Letter Modal -->
+    <!-- ========== 21 MODALS ========== -->
+    <!-- Modals 1-20 (same as before) -->
     <div class="modal" id="modal-letter">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('letter')">&times;</span>
-            <h2>💌 Mere Dil Ki Baat</h2>
+            <h2>💌 Love Letter</h2>
             <div class="content">
-                <p style="font-size:1.3rem; line-height:2;">"Meri Jan pehly Pehly to Yahiii kahonga k Janan Din Mubarak Ho meri jan,<br>
+                <p style="font-size:1.3rem;">Meri Jan pehly Pehly to Yahiii kahonga k Janan Din Mubarak Ho meri jan,<br>
                 Tum smjh sktiii ho how can i feel for you,<br>
                 Tum mery liye sab sy brh k Ho,<br>
                 Is Special Din k moqay pr m yahi kahonga K Allah tumhain Khusian day,<br>
                 Allah tumhain Hamesha mery sath Rkhy,<br>
-                M janta hn tum kis qdr zrori ho mery liye i love you meri jan"</p>
+                M janta hn tum kis qdr zrori ho mery liye i love you meri jan</p>
                 <p>Hey jan,<br><br>
                 You're the melody that fills my heart with joy, the rhythm that makes life worth living. Every moment with you is a sweet serendipity, a reminder that I'm exactly where I'm meant to be.<br><br>
                 Thanks for being my partner in crime, my confidant, and my forever crush 😊<br><br>
@@ -438,52 +410,47 @@
         </div>
     </div>
 
-    <!-- Gallery Modal -->
     <div class="modal" id="modal-gallery">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('gallery')">&times;</span>
-            <h2>📸 Humari Yaadein</h2>
+            <h2>📸 Gallery</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
         </div>
     </div>
 
-    <!-- 25 Reasons Modal -->
     <div class="modal" id="modal-reasons">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('reasons')">&times;</span>
-            <h2>💖 25 Reasons I Love You</h2>
+            <h2>💖 25 Reasons</h2>
             <div class="reason-list" id="reasonsList"></div>
         </div>
     </div>
 
-    <!-- Promise Modal -->
     <div class="modal" id="modal-promise">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('promise')">&times;</span>
-            <h2>🤝 Mera Wada</h2>
+            <h2>🤝 Promise</h2>
             <div class="content">
-                <p style="font-size:1.8rem; line-height:1.8;">"Halat jaisy bhi ho jain meri jan M kabhi niii chor skta tumhain,<br>
+                <p style="font-size:1.8rem;">"Halat jaisy bhi ho jain meri jan M kabhi niii chor skta tumhain,<br>
                 M wada krta hn hamesha tumhara muntazir rahonga"<br><br>
                 <span style="font-size:2rem;">" Tumhara Akm "</span></p>
             </div>
         </div>
     </div>
 
-    <!-- Vouchers Modal -->
     <div class="modal" id="modal-vouchers">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('vouchers')">&times;</span>
-            <h2>🎟️ Tumhare Liye Vouchers</h2>
+            <h2>🎟️ Vouchers</h2>
             <div id="vouchersList"></div>
         </div>
     </div>
 
-    <!-- Poem Modal -->
     <div class="modal" id="modal-poem">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('poem')">&times;</span>
-            <h2>📝 Aik Poem Tumhare Naam</h2>
-            <div class="content" style="font-size:1.3rem; line-height:2.2;">
+            <h2>📝 Poem</h2>
+            <div class="content" style="font-size:1.3rem; line-height:2;">
                 تم آئی تو خاموشی نے بھی آواز دی<br>
                 ہر سانس نے اک نیا انداز دیا<br><br>
                 تم ہنسی تو پھول کھلے راستوں میں<br>
@@ -499,30 +466,27 @@
         </div>
     </div>
 
-    <!-- Playlist Modal -->
     <div class="modal" id="modal-playlist">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('playlist')">&times;</span>
-            <h2>🎵 Humare Geet</h2>
+            <h2>🎵 Playlist</h2>
             <div id="playlistItems"></div>
         </div>
     </div>
 
-    <!-- Candle Wish Modal -->
     <div class="modal" id="modal-candle">
         <div class="modal-card" style="text-align:center;">
             <span class="close-modal" onclick="closeModal('candle')">&times;</span>
-            <h2>🕯️ Ek Wish Karo</h2>
-            <div class="candle" onclick="blowCandle(this)">🕯️</div>
-            <div class="wish-message" id="wishMessage"></div>
+            <h2>🕯️ Wish</h2>
+            <div class="candle" onclick="blowCandle(this)" style="font-size:6rem; cursor:pointer;">🕯️</div>
+            <div id="wishMessage" style="font-size:2rem; margin-top:20px;"></div>
         </div>
     </div>
 
-    <!-- Timeline Modal -->
     <div class="modal" id="modal-timeline">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('timeline')">&times;</span>
-            <h2>📅 Humari Kahani</h2>
+            <h2>📅 Timeline</h2>
             <div class="content">
                 <p><strong>💙 TikTok Pe Mulaqat</strong> – Credit TikTok, maine comment kiya</p>
                 <p><strong>📞 Pehli Call</strong> – Sunday, awaaz dil mein utar gayi</p>
@@ -533,28 +497,21 @@
         </div>
     </div>
 
-    <!-- Countdown Modal -->
     <div class="modal" id="modal-countdown">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('countdown')">&times;</span>
-            <h2>⏳ Birthday Countdown</h2>
+            <h2>⏳ Countdown</h2>
             <div class="content" style="text-align:center;">
-                <div style="font-size:3rem; display:flex; gap:20px; justify-content:center;" id="countdownDisplay">
-                    <div><span id="days">00</span>d</div>
-                    <div><span id="hours">00</span>h</div>
-                    <div><span id="minutes">00</span>m</div>
-                    <div><span id="seconds">00</span>s</div>
-                </div>
-                <p style="margin-top:30px;">4 March 2004 ❤️</p>
+                <div style="font-size:2rem;" id="countdownDisplay"></div>
+                <p style="margin-top:20px;">4 March 2004 ❤️</p>
             </div>
         </div>
     </div>
 
-    <!-- Hidden Surprise Modal -->
     <div class="modal" id="modal-surprise">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('surprise')">&times;</span>
-            <h2>🎁 Kya Hai Andar?</h2>
+            <h2>🎁 Hidden Surprise</h2>
             <div class="content" style="text-align:center;">
                 <img src="https://via.placeholder.com/300x200/ff4d6d/ffffff?text=Azu+❤️" style="border-radius:20px; max-width:100%;">
                 <p style="margin-top:20px;">Humesha ❤️</p>
@@ -562,39 +519,35 @@
         </div>
     </div>
 
-    <!-- Open When Letters Modal -->
     <div class="modal" id="modal-openwhen">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('openwhen')">&times;</span>
             <h2>💌 Open When...</h2>
-            <div class="content" id="openWhenList"></div>
+            <div id="openWhenList"></div>
         </div>
     </div>
 
-    <!-- Quiz Modal -->
     <div class="modal" id="modal-quiz">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('quiz')">&times;</span>
-            <h2>❓ Kitna Jaanti Ho Mujhe?</h2>
-            <div class="content" id="quizContainer"></div>
+            <h2>❓ Quiz</h2>
+            <div id="quizContainer"></div>
         </div>
     </div>
 
-    <!-- Constellation Modal -->
     <div class="modal" id="modal-constellation">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('constellation')">&times;</span>
-            <h2>✨ Sitaron Mein Likha</h2>
-            <canvas id="constellationCanvas" width="500" height="250" style="width:100%; height:auto; background:black; border-radius:20px;"></canvas>
-            <p style="text-align:center; margin-top:15px;">6 June 2004 — Jab kismat likhi ja rahi thi</p>
+            <h2>✨ Stars</h2>
+            <canvas id="constellationCanvas" width="400" height="200" style="width:100%; background:#000; border-radius:20px;"></canvas>
+            <p style="text-align:center; margin-top:10px;">6 June 2004</p>
         </div>
     </div>
 
-    <!-- Future Plans Modal -->
     <div class="modal" id="modal-future">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('future')">&times;</span>
-            <h2>🌍 Sath Mein Sapne</h2>
+            <h2>🌍 Future</h2>
             <div class="content">
                 <p>🌿 Nature Escape – Ek saath, khamoshi, aur nature</p>
                 <p>🥺 Arms & Hair Time – Tumhari baahon mein, tumhari ungliyan mere baalon mein</p>
@@ -603,11 +556,10 @@
         </div>
     </div>
 
-    <!-- Friend Messages Modal -->
     <div class="modal" id="modal-friend">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('friend')">&times;</span>
-            <h2>👥 Doston Ki Dua</h2>
+            <h2>👥 Friends</h2>
             <div class="content">
                 <p>🌸 "Azra, happy birthday! You're the best thing that happened to him."</p>
                 <p>🎉 "Wish you both infinite happiness!"</p>
@@ -616,68 +568,69 @@
         </div>
     </div>
 
-    <!-- Video Message Modal -->
     <div class="modal" id="modal-video">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('video')">&times;</span>
-            <h2>📹 Video Surprise</h2>
-            <div class="content" style="text-align:center;">
-                <video controls style="max-width:100%; border-radius:20px;">
-                    <source src="your-video.mp4" type="video/mp4">
-                    Video placeholder – add your video file.
-                </video>
-            </div>
+            <h2>📹 Video</h2>
+            <video controls style="width:100%; border-radius:20px;">
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
-    <!-- Scrapbook Modal -->
     <div class="modal" id="modal-scrapbook">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('scrapbook')">&times;</span>
-            <h2>📔 Digital Scrapbook</h2>
+            <h2>📔 Scrapbook</h2>
             <div class="gallery-grid" id="scrapbookGrid"></div>
         </div>
     </div>
 
-    <!-- Heart Modal (extra love) -->
     <div class="modal" id="modal-heart">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('heart')">&times;</span>
-            <h2>❤️ Dil Se</h2>
+            <h2>❤️ Heart</h2>
             <div class="content" style="font-size:2rem; text-align:center;">
-                <p>I ❤️ U</p>
-                <p>Meri Azra</p>
-                <p style="font-size:1.2rem; margin-top:30px;">– Hamesha tumhara</p>
+                <p>I ❤️ U Meri Azra</p>
             </div>
         </div>
     </div>
 
-    <!-- Personal Note Modal -->
     <div class="modal" id="modal-signature">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('signature')">&times;</span>
-            <h2>✍️ Aik Personal Note</h2>
-            <div class="content" style="font-family: 'Dancing Script', cursive; font-size:1.8rem; text-align:center;">
+            <h2>✍️ Note</h2>
+            <div class="content" style="font-size:1.8rem; text-align:center;">
                 I Love Meri Jann 😘
             </div>
         </div>
     </div>
 
+    <!-- 21st Modal: Final Surprise -->
+    <div class="modal" id="modal-last">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('last')">&times;</span>
+            <h2>I want to say something</h2>
+            <div class="content" style="font-size:2rem; text-align:center;">
+                <p>Choro koi bat niii 😔</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ========== BINARY RAIN BACKGROUND ==========
+        // ========== BINARY BACKGROUND ==========
         const canvas = document.getElementById('binary-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const binary = '01';
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = [];
         for (let x = 0; x < columns; x++) drops[x] = 1;
-
         function drawBinary() {
-            ctx.fillStyle = 'rgba(10, 15, 30, 0.05)';
+            ctx.fillStyle = 'rgba(10,15,30,0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#ff4d6d';
             ctx.font = fontSize + 'px monospace';
@@ -690,75 +643,60 @@
         }
         setInterval(drawBinary, 50);
 
-        // ========== MUSIC CONTROL ==========
-        let music = new Audio();
-        music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // replace with your song file
+        // ========== MUSIC ==========
+        let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
         music.loop = true;
         function toggleMusic() {
             if (music.paused) { music.play(); document.getElementById('musicBtn').innerHTML = '⏸️'; }
             else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
         }
 
-        // ========== GIFT BOX CLICK HANDLING ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            const giftWrapper = document.getElementById('giftWrapper');
-            const giftBox = document.getElementById('giftBox');
-            
-            function openGift() {
-                console.log('Gift opened');
-                document.getElementById('giftLid').classList.add('open');
-                setTimeout(() => {
-                    giftWrapper.style.display = 'none';
-                    document.getElementById('iconsContainer').style.display = 'flex';
-                    // Load dynamic content
-                    loadGallery();
-                    loadReasons();
-                    loadVouchers();
-                    loadPlaylist();
-                    loadOpenWhen();
-                    loadQuiz();
-                    drawConstellationCanvas();
-                    loadScrapbook();
-                }, 500);
-            }
-
-            // Multiple event listeners for reliability
-            giftWrapper.onclick = openGift;
-            giftBox.addEventListener('click', openGift);
-            giftWrapper.addEventListener('click', openGift);
-        });
+        // ========== OPEN GIFT ==========
+        function openGift() {
+            const wrapper = document.getElementById('giftWrapper');
+            wrapper.classList.add('open');
+            setTimeout(() => {
+                wrapper.style.display = 'none';
+                document.getElementById('iconsContainer').style.display = 'flex';
+                // Load dynamic content
+                loadGallery();
+                loadReasons();
+                loadVouchers();
+                loadPlaylist();
+                loadOpenWhen();
+                loadQuiz();
+                drawConstellationCanvas();
+                loadScrapbook();
+            }, 800);
+        }
 
         // ========== MODAL FUNCTIONS ==========
-        function openModal(type) {
-            document.getElementById(`modal-${type}`).style.display = 'flex';
+        function openModal(id) {
+            document.getElementById(`modal-${id}`).style.display = 'flex';
         }
-        function closeModal(type) {
-            document.getElementById(`modal-${type}`).style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(`modal-${id}`).style.display = 'none';
         }
 
-        // Close modal when clicking outside content
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) e.target.style.display = 'none';
         };
 
         // ========== LOAD DYNAMIC CONTENT ==========
         function loadGallery() {
-            const gallery = document.getElementById('galleryGrid');
-            if (!gallery) return;
-            gallery.innerHTML = '';
-            for (let i = 1; i <= 10; i++) {
+            const grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            for (let i = 1; i <= 6; i++) {
                 let img = document.createElement('img');
-                img.src = `https://via.placeholder.com/200x200/ff4d6d/ffffff?text=Azu+${i}`;
-                img.alt = `Memory ${i}`;
-                gallery.appendChild(img);
+                img.src = `https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i}`;
+                grid.appendChild(img);
             }
         }
 
         function loadReasons() {
-            const container = document.getElementById('reasonsList');
-            if (!container) return;
+            const list = document.getElementById('reasonsList');
+            if (!list) return;
             const reasons = [
                 'Your smile that lights up my world',
                 'The way you laugh — pure magic',
@@ -786,165 +724,112 @@
                 'Your hugs — they fix everything',
                 'You exist. That\'s enough.'
             ];
+            list.innerHTML = '';
             reasons.forEach((r, i) => {
                 let div = document.createElement('div');
                 div.className = 'reason-item';
-                div.innerHTML = `${i+1}. ${r}`;
-                container.appendChild(div);
+                div.textContent = `${i+1}. ${r}`;
+                list.appendChild(div);
             });
         }
 
         function loadVouchers() {
-            const container = document.getElementById('vouchersList');
-            if (!container) return;
-            const vouchers = [
-                { title: "🌿 Nature Escape", desc: "Ek trip kahin bhi – bas hum, khamoshi, aur nature." },
-                { title: "🥺 Arms & Hair Time", desc: "Unlimited time in your arms with your hands in my hair." },
-                { title: "💍 Forever With You", desc: "Sabse bada sapna – tumse shaadi, insha'Allah." }
-            ];
+            const cont = document.getElementById('vouchersList');
+            if (!cont) return;
+            cont.innerHTML = '';
+            const vouchers = ['🌿 Nature Escape', '🥺 Arms & Hair Time', '💍 Forever With You'];
             vouchers.forEach(v => {
-                let div = document.createElement('div');
-                div.className = 'voucher-card';
-                div.innerHTML = `<h3>${v.title}</h3><p>${v.desc}</p><button class="redeem-btn" onclick="this.innerText='Redeemed! 💝'; this.disabled=true">Redeem</button>`;
-                container.appendChild(div);
+                let card = document.createElement('div');
+                card.className = 'voucher-card';
+                card.innerHTML = `<h3>${v}</h3><button class="redeem-btn" onclick="this.textContent='Redeemed!'; this.disabled=true">Redeem</button>`;
+                cont.appendChild(card);
             });
         }
 
         function loadPlaylist() {
-            const container = document.getElementById('playlistItems');
-            if (!container) return;
-            const songs = [
-                "Ishq Mubarak – Arijit Singh",
-                "Tum Hi Ho – Arijit Singh",
-                "Raabta – Arikit Singh",
-                "Humsafar – Akhil Sachdeva",
-                "Tera Zikr – Darshan Raval"
-            ];
+            const cont = document.getElementById('playlistItems');
+            if (!cont) return;
+            cont.innerHTML = '';
+            const songs = ['Ishq Mubarak - Arijit Singh', 'Tum Hi Ho - Arijit Singh', 'Raabta - Arikit Singh', 'Humsafar - Akhil Sachdeva', 'Tera Zikr - Darshan Raval'];
             songs.forEach((s, i) => {
                 let div = document.createElement('div');
                 div.className = 'playlist-item';
-                div.innerHTML = `<span class="playlist-number">${i+1}</span><span>${s}</span>`;
-                container.appendChild(div);
+                div.textContent = `${i+1}. ${s}`;
+                cont.appendChild(div);
             });
         }
 
         function loadOpenWhen() {
-            const container = document.getElementById('openWhenList');
-            if (!container) return;
+            const cont = document.getElementById('openWhenList');
+            if (!cont) return;
+            cont.innerHTML = '';
             const letters = [
-                "💕 Open When You Miss Me: I miss you too... sending a hug.",
-                "🥺 Open When You're Sad: Wipe those tears, I'm here.",
-                "😊 Open When You're Happy: Keep smiling forever.",
-                "🌙 Open When You Can't Sleep: Imagine my arms around you.",
-                "🫂 Open When You're Angry At Me: Let's talk, I love you.",
-                "💖 Open When You Need to Feel Loved: You are my everything."
+                '💕 Open When You Miss Me: I miss you too... sending a hug.',
+                '🥺 Open When You\'re Sad: Wipe those tears, I\'m here.',
+                '😊 Open When You\'re Happy: Keep smiling forever.',
+                '🌙 Open When You Can\'t Sleep: Imagine my arms around you.',
+                '🫂 Open When You\'re Angry At Me: Let\'s talk, I love you.',
+                '💖 Open When You Need to Feel Loved: You are my everything.'
             ];
             letters.forEach(l => {
                 let p = document.createElement('p');
                 p.textContent = l;
                 p.style.margin = '10px 0';
-                container.appendChild(p);
+                cont.appendChild(p);
             });
         }
 
         function loadQuiz() {
-            const container = document.getElementById('quizContainer');
-            if (!container) return;
-            const questions = [
-                { q: "Hum pehli baar kahan mile?", options: ["Instagram","TikTok","Facebook","Real life"], correct: 1 },
-                { q: "Pehla special naam jo maine tumhe diya?", options: ["Baby","Meri Jan","Jaanu","Sweetie"], correct: 1 },
-                { q: "Hamara gaana kaunsa hai?", options: ["Ishq Mubarak","Tum Hi Ho","Perfect","Teri Meri"], correct: 0 },
-                { q: "Special moment kahan tha?", options: ["Beach","Indus Hotel","Park","Restaurant"], correct: 1 },
-                { q: "Maine tumse kya wada kiya?", options: ["Kabhi nahi chorunga","Gifts dunga","Sath ghumenge","Roz call karunga"], correct: 0 }
-            ];
-            questions.forEach((q, idx) => {
-                let div = document.createElement('div');
-                div.style.marginBottom = '20px';
-                div.innerHTML = `<p><strong>${idx+1}. ${q.q}</strong></p>`;
-                q.options.forEach((opt, optIdx) => {
-                    let btn = document.createElement('button');
-                    btn.textContent = opt;
-                    btn.style.margin = '5px';
-                    btn.style.padding = '8px 15px';
-                    btn.style.background = '#ff4d6d';
-                    btn.style.border = 'none';
-                    btn.style.color = 'white';
-                    btn.style.borderRadius = '20px';
-                    btn.style.cursor = 'pointer';
-                    btn.onclick = function() {
-                        if (optIdx === q.correct) {
-                            alert('Sahi jawab! ❤️');
-                            btn.style.background = 'green';
-                        } else {
-                            alert('Thoda sa galat...');
-                            btn.style.background = 'gray';
-                        }
-                        // disable all options after answer
-                        div.querySelectorAll('button').forEach(b => b.disabled = true);
-                    };
-                    div.appendChild(btn);
-                });
-                container.appendChild(div);
-            });
+            const cont = document.getElementById('quizContainer');
+            if (!cont) return;
+            cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
         }
 
         function drawConstellationCanvas() {
-            const canvas = document.getElementById('constellationCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const c = document.getElementById('constellationCanvas');
+            if (!c) return;
+            const ctx = c.getContext('2d');
+            ctx.clearRect(0,0,c.width,c.height);
             ctx.fillStyle = 'white';
-            for (let i = 0; i < 80; i++) {
-                ctx.beginPath();
-                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 2, 0, 2 * Math.PI);
-                ctx.fill();
-            }
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2, canvas.height/2 - 20);
-            ctx.bezierCurveTo(canvas.width/2 - 40, canvas.height/2 - 60, canvas.width/2 - 60, canvas.height/2 + 15, canvas.width/2, canvas.height/2 + 40);
-            ctx.bezierCurveTo(canvas.width/2 + 60, canvas.height/2 + 15, canvas.width/2 + 40, canvas.height/2 - 60, canvas.width/2, canvas.height/2 - 20);
+            for (let i=0;i<50;i++) ctx.fillRect(Math.random()*c.width, Math.random()*c.height,2,2);
             ctx.strokeStyle = '#ff4d6d';
-            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200,50);
+            ctx.quadraticCurveTo(300,150,200,150);
             ctx.stroke();
         }
 
         function loadScrapbook() {
             const grid = document.getElementById('scrapbookGrid');
             if (!grid) return;
-            for (let i = 1; i <= 4; i++) {
+            grid.innerHTML = '';
+            for (let i=1;i<=4;i++) {
                 let img = document.createElement('img');
-                img.src = `https://via.placeholder.com/200x200/ffb3c6/0a0f1e?text=Scrap+${i}`;
-                img.style.borderRadius = '15px';
+                img.src = `https://via.placeholder.com/100/ffb3c6/000?text=Page${i}`;
                 grid.appendChild(img);
             }
         }
 
-        // Countdown timer
-        function updateCountdown() {
-            const birthday = new Date('March 4, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = birthday - now;
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
-                document.getElementById('hours').innerText = Math.floor((diff % (86400000)) / (3600000));
-                document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
-                document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
-            } else {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-            }
-        }
-        setInterval(updateCountdown, 1000);
-
-        // Candle blow
         function blowCandle(el) {
             el.innerHTML = '💨';
             document.getElementById('wishMessage').innerHTML = 'All your dreams come true meri jan ❤️';
         }
 
-        // Make sure all modals are initially hidden (they are via CSS display:none)
+        function updateCountdown() {
+            const bday = new Date('March 4, 2025').getTime();
+            const now = new Date().getTime();
+            const diff = bday - now;
+            if (diff > 0) {
+                document.getElementById('countdownDisplay').innerHTML = 
+                    Math.floor(diff/(1000*60*60*24))+'d '+
+                    Math.floor((diff%(1000*60*60*24))/(1000*60*60))+'h '+
+                    Math.floor((diff%(1000*60*60))/(1000*60))+'m '+
+                    Math.floor((diff%(1000*60))/1000)+'s';
+            } else {
+                document.getElementById('countdownDisplay').innerHTML = '🎉 It\'s her birthday! 🎉';
+            }
+        }
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
