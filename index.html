@@ -23,7 +23,6 @@
             position: relative;
         }
 
-        /* Binary rain background */
         #binary-bg {
             position: absolute;
             top: 0;
@@ -35,7 +34,6 @@
             z-index: 1;
         }
 
-        /* Main container */
         .container {
             position: relative;
             z-index: 10;
@@ -43,14 +41,14 @@
             width: 100%;
         }
 
-        /* ========== BIRTHDAY GIFT BOX (using your image) ========== */
+        /* Gift box wrapper */
         .gift-wrapper {
             position: relative;
             display: inline-block;
             cursor: pointer;
             text-align: center;
             z-index: 20;
-            animation: floatHeart 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite;
         }
 
         .image-box {
@@ -69,7 +67,6 @@
             object-fit: cover;
         }
 
-        /* Flowers (same) */
         .flower {
             position: absolute;
             font-size: 2.5rem;
@@ -91,13 +88,12 @@
             100% { transform: rotate(0deg); }
         }
 
-        @keyframes floatHeart {
+        @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
 
-        /* Opening animation */
         .gift-wrapper.open {
             animation: openGift 0.8s forwards;
         }
@@ -117,7 +113,7 @@
             z-index: 30;
         }
 
-        /* ========== ICONS CONTAINER (21 icons) ========== */
+        /* Icons container */
         .icons-container {
             display: none;
             flex-wrap: wrap;
@@ -159,7 +155,7 @@
             text-align: center;
         }
 
-        /* ========== MODAL STYLES ========== */
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -208,7 +204,6 @@
             padding-bottom: 10px;
         }
 
-        /* Gallery grid (for photo gallery & scrapbook) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -221,7 +216,6 @@
             border: 2px solid #ff4d6d;
         }
 
-        /* Reason list */
         .reason-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -235,10 +229,43 @@
             font-size: 0.95rem;
         }
 
-        /* Playlist item */
         .playlist-item {
             padding: 8px;
             border-bottom: 1px solid #ff4d6d;
+        }
+
+        /* Favourite things grid */
+        .favourite-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .favourite-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #ff4d6d;
+            transition: transform 0.3s;
+        }
+
+        .favourite-item:hover {
+            transform: scale(1.02);
+        }
+
+        .favourite-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 2px solid #ff4d6d;
+        }
+
+        .favourite-item p {
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: #ffb3c6;
         }
 
         /* Floating elements */
@@ -278,10 +305,10 @@
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
     <div class="container">
-        <!-- Initial gift box: use your birthday image (replace birthday-box.jpg) -->
+        <!-- Initial gift box (replace with your image) -->
         <div class="gift-wrapper" id="giftWrapper" onclick="openGift()">
-            <div class="image-box" id="imageBox">
-                <img src="birthday-box.jpg" alt="Happy Birthday">
+            <div class="image-box">
+                <img src="birthday-box.jpg" alt="Open Gift" onerror="this.src='https://via.placeholder.com/300x300/ff4d6d/ffffff?text=Happy+Birthday'">
             </div>
             <div class="flower flower1">🌸</div>
             <div class="flower flower2">🌼</div>
@@ -292,10 +319,10 @@
             <div class="gift-message">Click to open your birthday gift 🎂</div>
         </div>
 
-        <!-- 21 Icons (Happy Birthday first) -->
+        <!-- Icons container (21 icons) -->
         <div class="icons-container" id="iconsContainer">
-            <!-- 1. Happy Birthday (picture) -->
-            <div class="icon-item" onclick="openModal('future')"><span>🎂</span><p>Happy Birthday</p></div>
+            <!-- 1. Happy Birthday (new, replaces voucher) -->
+            <div class="icon-item" onclick="openModal('happybirthday')"><span>🎂</span><p>Happy Birthday</p></div>
             <!-- 2. Love Letter -->
             <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Letter</p></div>
             <!-- 3. Gallery -->
@@ -308,7 +335,7 @@
             <div class="icon-item" onclick="openModal('poem')"><span>📝</span><p>Poem</p></div>
             <!-- 7. Playlist -->
             <div class="icon-item" onclick="openModal('playlist')"><span>🎵</span><p>Playlist</p></div>
-            <!-- 8. Wish (candle) -->
+            <!-- 8. Wish -->
             <div class="icon-item" onclick="openModal('candle')"><span>🕯️</span><p>Wish</p></div>
             <!-- 9. Timeline -->
             <div class="icon-item" onclick="openModal('timeline')"><span>📅</span><p>Timeline</p></div>
@@ -320,33 +347,34 @@
             <div class="icon-item" onclick="openModal('openwhen')"><span>💌</span><p>Open When</p></div>
             <!-- 13. Quiz -->
             <div class="icon-item" onclick="openModal('quiz')"><span>❓</span><p>Quiz</p></div>
-            <!-- 14. Stars (Constellation) -->
+            <!-- 14. Stars -->
             <div class="icon-item" onclick="openModal('constellation')"><span>✨</span><p>Stars</p></div>
-            <!-- 15. Friends -->
+            <!-- 15. Favourite Things (replaces future plans) -->
+            <div class="icon-item" onclick="openModal('favourite')"><span>🌟</span><p>Favourite</p></div>
+            <!-- 16. Friends -->
             <div class="icon-item" onclick="openModal('friend')"><span>👥</span><p>Friends</p></div>
-            <!-- 16. Video -->
+            <!-- 17. Video -->
             <div class="icon-item" onclick="openModal('video')"><span>📹</span><p>Video</p></div>
-            <!-- 17. Scrapbook -->
+            <!-- 18. Scrapbook -->
             <div class="icon-item" onclick="openModal('scrapbook')"><span>📔</span><p>Scrapbook</p></div>
-            <!-- 18. Heart -->
+            <!-- 19. Heart -->
             <div class="icon-item" onclick="openModal('heart')"><span>❤️</span><p>Heart</p></div>
-            <!-- 19. Note -->
+            <!-- 20. Note -->
             <div class="icon-item" onclick="openModal('signature')"><span>✍️</span><p>Note</p></div>
-            <!-- 20. There is Something (final) -->
+            <!-- 21. There is Something -->
             <div class="icon-item" onclick="openModal('last')"><span>💬</span><p>There is Something</p></div>
         </div>
     </div>
 
-    <!-- ========== 21 MODALS ========== -->
+    <!-- ========== MODALS (21) ========== -->
 
-    <!-- 1. Happy Birthday Modal (replaces old future) -->
-    <div class="modal" id="modal-future">
+    <!-- 1. Happy Birthday Modal -->
+    <div class="modal" id="modal-happybirthday">
         <div class="modal-card" style="max-width: 500px; text-align: center;">
-            <span class="close-modal" onclick="closeModal('future')">&times;</span>
+            <span class="close-modal" onclick="closeModal('happybirthday')">&times;</span>
             <h2>🎉 Happy Birthday Azra! 🎉</h2>
             <div style="margin: 20px 0;">
-                <!-- Replace 'birthday.jpg' with your birthday image file -->
-                <img src="birthday.jpg" alt="Happy Birthday" style="width: 100%; border-radius: 20px; border: 3px solid #ff4d6d; box-shadow: 0 0 30px #ff4d6d;">
+                <img src="birthday.jpg" alt="Happy Birthday" onerror="this.src='https://via.placeholder.com/400x300/ff4d6d/ffffff?text=Happy+Birthday+Azra'" style="width: 100%; border-radius: 20px; border: 3px solid #ff4d6d; box-shadow: 0 0 30px #ff4d6d;">
             </div>
             <p style="font-size: 1.5rem; color: #ffb3c6;">Meri Jan, you are my world! ❤️</p>
         </div>
@@ -433,7 +461,7 @@
         </div>
     </div>
 
-    <!-- 8. Candle Wish Modal -->
+    <!-- 8. Wish Modal (updated message) -->
     <div class="modal" id="modal-candle">
         <div class="modal-card" style="text-align:center;">
             <span class="close-modal" onclick="closeModal('candle')">&times;</span>
@@ -476,8 +504,7 @@
             <span class="close-modal" onclick="closeModal('surprise')">&times;</span>
             <h2>🎁 Hidden Surprise</h2>
             <div class="content" style="text-align:center;">
-                <!-- Replace 'hidden.jpg' with your secret image -->
-                <img src="hidden.jpg" style="border-radius:20px; max-width:100%;">
+                <img src="hidden.jpg" onerror="this.src='https://via.placeholder.com/300x200/ff4d6d/ffffff?text=Surprise'" style="border-radius:20px; max-width:100%;">
                 <p style="margin-top:20px;">Humesha ❤️</p>
             </div>
         </div>
@@ -501,7 +528,7 @@
         </div>
     </div>
 
-    <!-- 14. Stars (Constellation) Modal -->
+    <!-- 14. Stars Modal -->
     <div class="modal" id="modal-constellation">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('constellation')">&times;</span>
@@ -511,7 +538,16 @@
         </div>
     </div>
 
-    <!-- 15. Friends Modal (updated) -->
+    <!-- 15. Favourite Things Modal (new) -->
+    <div class="modal" id="modal-favourite">
+        <div class="modal-card" style="max-width: 700px;">
+            <span class="close-modal" onclick="closeModal('favourite')">&times;</span>
+            <h2>🌟 My Favourite Things About You</h2>
+            <div class="favourite-grid" id="favouriteGrid"></div>
+        </div>
+    </div>
+
+    <!-- 16. Friends Modal (updated) -->
     <div class="modal" id="modal-friend">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('friend')">&times;</span>
@@ -522,7 +558,7 @@
         </div>
     </div>
 
-    <!-- 16. Video Modal -->
+    <!-- 17. Video Modal -->
     <div class="modal" id="modal-video">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('video')">&times;</span>
@@ -534,7 +570,7 @@
         </div>
     </div>
 
-    <!-- 17. Scrapbook Modal -->
+    <!-- 18. Scrapbook Modal -->
     <div class="modal" id="modal-scrapbook">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('scrapbook')">&times;</span>
@@ -543,7 +579,7 @@
         </div>
     </div>
 
-    <!-- 18. Heart Modal -->
+    <!-- 19. Heart Modal -->
     <div class="modal" id="modal-heart">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('heart')">&times;</span>
@@ -554,7 +590,7 @@
         </div>
     </div>
 
-    <!-- 19. Note Modal -->
+    <!-- 20. Note Modal -->
     <div class="modal" id="modal-signature">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('signature')">&times;</span>
@@ -565,7 +601,7 @@
         </div>
     </div>
 
-    <!-- 20. "There is Something" Modal (final) -->
+    <!-- 21. There is Something Modal (final) -->
     <div class="modal" id="modal-last">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('last')">&times;</span>
@@ -577,7 +613,7 @@
     </div>
 
     <script>
-        // ========== BINARY BACKGROUND ==========
+        // Binary background
         const canvas = document.getElementById('binary-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -601,7 +637,7 @@
         }
         setInterval(drawBinary, 50);
 
-        // ========== MUSIC ==========
+        // Music
         let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
         music.loop = true;
         function toggleMusic() {
@@ -609,7 +645,7 @@
             else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
         }
 
-        // ========== OPEN GIFT ==========
+        // Open gift
         function openGift() {
             const wrapper = document.getElementById('giftWrapper');
             wrapper.classList.add('open');
@@ -624,10 +660,11 @@
                 loadQuiz();
                 drawConstellationCanvas();
                 loadScrapbook();
+                loadFavouriteThings(); // load favourite things images
             }, 800);
         }
 
-        // ========== MODAL FUNCTIONS ==========
+        // Modal functions
         function openModal(id) {
             document.getElementById(modal-${id}).style.display = 'flex';
         }
@@ -639,19 +676,20 @@
             if (e.target.classList.contains('modal')) e.target.style.display = 'none';
         };
 
-        // ========== LOAD DYNAMIC CONTENT ==========
+        // Load gallery
         function loadGallery() {
             const grid = document.getElementById('galleryGrid');
             if (!grid) return;
             grid.innerHTML = '';
             for (let i = 1; i <= 6; i++) {
                 let img = document.createElement('img');
-                img.src = photo${i}.jpg; // replace with your own images
+                img.src = photo${i}.jpg;
                 img.onerror = function() { this.src = 'https://via.placeholder.com/150/ff4d6d/fff?text=Photo'+i; };
                 grid.appendChild(img);
             }
         }
 
+        // Load reasons
         function loadReasons() {
             const list = document.getElementById('reasonsList');
             if (!list) return;
@@ -691,6 +729,7 @@
             });
         }
 
+        // Load playlist
         function loadPlaylist() {
             const cont = document.getElementById('playlistItems');
             if (!cont) return;
@@ -704,6 +743,7 @@
             });
         }
 
+        // Load open when
         function loadOpenWhen() {
             const cont = document.getElementById('openWhenList');
             if (!cont) return;
@@ -724,12 +764,14 @@
             });
         }
 
+        // Load quiz placeholder
         function loadQuiz() {
             const cont = document.getElementById('quizContainer');
             if (!cont) return;
             cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
         }
 
+        // Draw constellation
         function drawConstellationCanvas() {
             const c = document.getElementById('constellationCanvas');
             if (!c) return;
@@ -744,25 +786,50 @@
             ctx.stroke();
         }
 
+        // Load scrapbook
         function loadScrapbook() {
             const grid = document.getElementById('scrapbookGrid');
             if (!grid) return;
             grid.innerHTML = '';
             for (let i=1;i<=4;i++) {
                 let img = document.createElement('img');
-                img.src = scrap${i}.jpg; // replace with your scrapbook images
+                img.src = scrap${i}.jpg;
                 img.onerror = function() { this.src = 'https://via.placeholder.com/100/ffb3c6/000?text=Page'+i; };
                 grid.appendChild(img);
             }
         }
 
-        // ========== CANDLE WISH (updated) ==========
+        // Load favourite things (new function)
+        function loadFavouriteThings() {
+            const grid = document.getElementById('favouriteGrid');
+            if (!grid) return;
+            const favourites = [
+                { img: 'fav1.jpg', caption: 'Your smile 😊' },
+                { img: 'fav2.jpg', caption: 'The way you laugh 🎵' },
+                { img: 'fav3.jpg', caption: 'How you say "Meri Jan" 💕' },
+                { img: 'fav4.jpg', caption: 'Our late-night talks ☕' },
+                { img: 'fav5.jpg', caption: 'The care in your eyes ✨' },
+                { img: 'fav6.jpg', caption: 'Just you being you 💫' }
+            ];
+            grid.innerHTML = '';
+            favourites.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'favourite-item';
+                div.innerHTML = `
+                    <img src="${item.img}" alt="${item.caption}" onerror="this.src='https://via.placeholder.com/200x150/ff4d6d/ffffff?text=Favourite'">
+                    <p>${item.caption}</p>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Candle wish (updated)
         function blowCandle(el) {
             el.innerHTML = '💨';
             document.getElementById('wishMessage').innerHTML = 'Allah Tumhain Hamesha Hansta Murskarata Rkhy meri jan ❤️';
         }
 
-        // ========== COUNTDOWN TIMER ==========
+        // Countdown timer
         function updateCountdown() {
             const bday = new Date('March 4, 2025').getTime();
             const now = new Date().getTime();
