@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azra's Birthday Gift 🎁</title>
+    <title>Azra's Heart Gift · Stars & Hearts</title>
     <style>
         * {
             margin: 0;
@@ -23,13 +23,54 @@
             position: relative;
         }
 
+        /* floating hearts & stars */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .heart-float, .star-float {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.7);
+            font-size: 1.8rem;
+            user-select: none;
+            animation: floatAround 18s infinite linear;
+            filter: drop-shadow(0 0 8px #ff4d6d);
+        }
+
+        .star-float {
+            color: rgba(255, 215, 0, 0.8);
+            font-size: 1.4rem;
+            text-shadow: 0 0 12px gold;
+            animation: twinkleFloat 14s infinite alternate;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) translateX(30px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes twinkleFloat {
+            0% { transform: translateY(80vh) scale(0.8); opacity: 0.3; }
+            50% { transform: translateY(40vh) scale(1.2); opacity: 1; text-shadow: 0 0 20px gold; }
+            100% { transform: translateY(-10vh) scale(0.9); opacity: 0.2; }
+        }
+
         #binary-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.1;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 1;
         }
@@ -41,36 +82,86 @@
             width: 100%;
         }
 
-        /* Gift box wrapper */
+        /* ========== HEART GIFT BOX ========== */
         .gift-wrapper {
             position: relative;
             display: inline-block;
             cursor: pointer;
             text-align: center;
             z-index: 20;
-            animation: float 3s ease-in-out infinite;
+            animation: floatHeart 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px #ffb3c6);
         }
 
-        .image-box {
+        .heart-box {
+            position: relative;
             width: 300px;
-            height: 300px;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px #ff4d6d, 0 0 30px #ffb3c6;
-            border: 4px solid #ffb3c6;
+            height: 270px;
+            background: linear-gradient(145deg, #ff4d6d, #c9184a);
+            transform: rotate(-45deg);
+            border-radius: 50% 50% 0 50%;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.8), 0 0 50px #ffb3c6;
             margin-bottom: 20px;
+            transition: all 0.3s;
         }
 
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .heart-box::before,
+        .heart-box::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 270px;
+            background: inherit;
+            border-radius: 50% 50% 0 50%;
+            box-shadow: inherit;
         }
+
+        .heart-box::before {
+            top: -135px;
+            left: 0;
+            border-radius: 50% 50% 50% 0;
+        }
+
+        .heart-box::after {
+            left: 135px;
+            top: 0;
+            border-radius: 50% 0 50% 50%;
+        }
+
+        .heart-ribbon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 120px;
+            height: 30px;
+            background: #ffb3c6;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #fff;
+            z-index: 25;
+        }
+
+        .heart-ribbon::before,
+        .heart-ribbon::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 120px;
+            background: #ffb3c6;
+            border-radius: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 30px #fff;
+        }
+
+        .heart-ribbon::before { transform: translate(-50%, -50%) rotate(90deg); }
+        .heart-ribbon::after { transform: translate(-50%, -50%) rotate(0deg); }
 
         .flower {
             position: absolute;
             font-size: 2.5rem;
-            filter: drop-shadow(0 0 10px #ffb3c6);
+            filter: drop-shadow(0 0 15px #ffb3c6);
             animation: sway 4s ease-in-out infinite;
             z-index: 15;
         }
@@ -88,17 +179,17 @@
             100% { transform: rotate(0deg); }
         }
 
-        @keyframes float {
+        @keyframes floatHeart {
             0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
 
         .gift-wrapper.open {
-            animation: openGift 0.8s forwards;
+            animation: openHeart 0.8s forwards;
         }
 
-        @keyframes openGift {
+        @keyframes openHeart {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.2); opacity: 0.8; }
             100% { transform: scale(0); opacity: 0; }
@@ -108,12 +199,17 @@
             color: #ffb3c6;
             font-size: 1.3rem;
             margin-top: 30px;
-            text-shadow: 0 0 10px #ff4d6d;
+            text-shadow: 0 0 15px #ff4d6d;
             position: relative;
             z-index: 30;
+            background: rgba(10,15,30,0.4);
+            padding: 8px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(3px);
+            display: inline-block;
         }
 
-        /* Icons container */
+        /* ========== ICONS CONTAINER ========== */
         .icons-container {
             display: none;
             flex-wrap: wrap;
@@ -136,12 +232,14 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 15px #ff4d6d;
+            box-shadow: 0 0 20px #ff4d6d;
+            backdrop-filter: blur(4px);
         }
 
         .icon-item:hover {
             background: #ff4d6d;
             transform: scale(1.1);
+            box-shadow: 0 0 40px #ffb3c6;
         }
 
         .icon-item span {
@@ -155,7 +253,7 @@
             text-align: center;
         }
 
-        /* Modal styles */
+        /* ========== MODAL STYLES ========== */
         .modal {
             display: none;
             position: fixed;
@@ -164,7 +262,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -179,7 +277,7 @@
             max-height: 80vh;
             overflow-y: auto;
             color: white;
-            box-shadow: 0 0 50px #ff4d6d;
+            box-shadow: 0 0 60px #ff4d6d;
             position: relative;
             width: 90%;
         }
@@ -204,18 +302,30 @@
             padding-bottom: 10px;
         }
 
-        .gallery-grid {
+        /* Gallery grid & favourites grid */
+        .gallery-grid, .favourites-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px;
         }
 
-        .gallery-grid img {
+        .gallery-grid img, .favourites-grid img {
             width: 100%;
             border-radius: 10px;
             border: 2px solid #ff4d6d;
         }
 
+        .favourite-item {
+            text-align: center;
+        }
+
+        .favourite-item p {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #ffb3c6;
+        }
+
+        /* Reason list */
         .reason-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -229,46 +339,13 @@
             font-size: 0.95rem;
         }
 
+        /* Playlist item */
         .playlist-item {
             padding: 8px;
             border-bottom: 1px solid #ff4d6d;
         }
 
-        /* Favourite things grid */
-        .favourite-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .favourite-item {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #ff4d6d;
-            transition: transform 0.3s;
-        }
-
-        .favourite-item:hover {
-            transform: scale(1.02);
-        }
-
-        .favourite-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-bottom: 2px solid #ff4d6d;
-        }
-
-        .favourite-item p {
-            padding: 10px;
-            text-align: center;
-            font-size: 1rem;
-            color: #ffb3c6;
-        }
-
-        /* Floating elements */
+        /* Floating signature */
         .floating-signature {
             position: fixed;
             bottom: 20px;
@@ -279,6 +356,7 @@
             border: 1px solid #ff4d6d;
             color: #ffb3c6;
             z-index: 200;
+            backdrop-filter: blur(4px);
         }
 
         .music-btn {
@@ -294,21 +372,24 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 200;
-            box-shadow: 0 0 20px #ff4d6d;
+            box-shadow: 0 0 30px #ff4d6d;
         }
     </style>
 </head>
 <body>
     <canvas id="binary-bg"></canvas>
 
-    <div class="floating-signature">💻 I Love Meri Jann 😘</div>
+    <!-- floating hearts & stars -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <div class="floating-signature">💖 Meri Jann ✨</div>
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 
     <div class="container">
-        <!-- Initial gift box (replace with your image) -->
+        <!-- Heart gift box with flowers -->
         <div class="gift-wrapper" id="giftWrapper" onclick="openGift()">
-            <div class="image-box">
-                <img src="birthday-box.jpg" alt="Open Gift" onerror="this.src='https://via.placeholder.com/300x300/ff4d6d/ffffff?text=Happy+Birthday'">
+            <div class="heart-box" id="heartBox">
+                <div class="heart-ribbon"></div>
             </div>
             <div class="flower flower1">🌸</div>
             <div class="flower flower2">🌼</div>
@@ -316,71 +397,40 @@
             <div class="flower flower4">🌹</div>
             <div class="flower flower5">🌷</div>
             <div class="flower flower6">🌸</div>
-            <div class="gift-message">Click to open your birthday gift 🎂</div>
+            <div class="gift-message">✨ open your heart gift ✨</div>
         </div>
 
-        <!-- Icons container (21 icons) -->
+        <!-- 21 Icons (updated labels) -->
         <div class="icons-container" id="iconsContainer">
-            <!-- 1. Happy Birthday (new, replaces voucher) -->
-            <div class="icon-item" onclick="openModal('happybirthday')"><span>🎂</span><p>Happy Birthday</p></div>
-            <!-- 2. Love Letter -->
             <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Letter</p></div>
-            <!-- 3. Gallery -->
             <div class="icon-item" onclick="openModal('gallery')"><span>📸</span><p>Gallery</p></div>
-            <!-- 4. 25 Reasons -->
             <div class="icon-item" onclick="openModal('reasons')"><span>💖</span><p>Reasons</p></div>
-            <!-- 5. Promise -->
             <div class="icon-item" onclick="openModal('promise')"><span>🤝</span><p>Promise</p></div>
-            <!-- 6. Poem -->
+            <!-- Vouchers replaced with Happy Birthday -->
+            <div class="icon-item" onclick="openModal('happybirthday')"><span>🎂</span><p>Happy Birthday</p></div>
             <div class="icon-item" onclick="openModal('poem')"><span>📝</span><p>Poem</p></div>
-            <!-- 7. Playlist -->
             <div class="icon-item" onclick="openModal('playlist')"><span>🎵</span><p>Playlist</p></div>
-            <!-- 8. Wish -->
             <div class="icon-item" onclick="openModal('candle')"><span>🕯️</span><p>Wish</p></div>
-            <!-- 9. Timeline -->
             <div class="icon-item" onclick="openModal('timeline')"><span>📅</span><p>Timeline</p></div>
-            <!-- 10. Countdown -->
             <div class="icon-item" onclick="openModal('countdown')"><span>⏳</span><p>Countdown</p></div>
-            <!-- 11. Hidden Surprise -->
             <div class="icon-item" onclick="openModal('surprise')"><span>🎁</span><p>Hidden</p></div>
-            <!-- 12. Open When -->
             <div class="icon-item" onclick="openModal('openwhen')"><span>💌</span><p>Open When</p></div>
-            <!-- 13. Quiz -->
             <div class="icon-item" onclick="openModal('quiz')"><span>❓</span><p>Quiz</p></div>
-            <!-- 14. Stars -->
             <div class="icon-item" onclick="openModal('constellation')"><span>✨</span><p>Stars</p></div>
-            <!-- 15. Favourite Things (replaces future plans) -->
-            <div class="icon-item" onclick="openModal('favourite')"><span>🌟</span><p>Favourite</p></div>
-            <!-- 16. Friends -->
+            <!-- Future replaced with Favourite Things -->
+            <div class="icon-item" onclick="openModal('favourites')"><span>💖</span><p>Favourite Things</p></div>
             <div class="icon-item" onclick="openModal('friend')"><span>👥</span><p>Friends</p></div>
-            <!-- 17. Video -->
             <div class="icon-item" onclick="openModal('video')"><span>📹</span><p>Video</p></div>
-            <!-- 18. Scrapbook -->
             <div class="icon-item" onclick="openModal('scrapbook')"><span>📔</span><p>Scrapbook</p></div>
-            <!-- 19. Heart -->
             <div class="icon-item" onclick="openModal('heart')"><span>❤️</span><p>Heart</p></div>
-            <!-- 20. Note -->
             <div class="icon-item" onclick="openModal('signature')"><span>✍️</span><p>Note</p></div>
-            <!-- 21. There is Something -->
+            <!-- Say Something -> There is Something -->
             <div class="icon-item" onclick="openModal('last')"><span>💬</span><p>There is Something</p></div>
         </div>
     </div>
 
-    <!-- ========== MODALS (21) ========== -->
-
-    <!-- 1. Happy Birthday Modal -->
-    <div class="modal" id="modal-happybirthday">
-        <div class="modal-card" style="max-width: 500px; text-align: center;">
-            <span class="close-modal" onclick="closeModal('happybirthday')">&times;</span>
-            <h2>🎉 Happy Birthday Azra! 🎉</h2>
-            <div style="margin: 20px 0;">
-                <img src="birthday.jpg" alt="Happy Birthday" onerror="this.src='https://via.placeholder.com/400x300/ff4d6d/ffffff?text=Happy+Birthday+Azra'" style="width: 100%; border-radius: 20px; border: 3px solid #ff4d6d; box-shadow: 0 0 30px #ff4d6d;">
-            </div>
-            <p style="font-size: 1.5rem; color: #ffb3c6;">Meri Jan, you are my world! ❤️</p>
-        </div>
-    </div>
-
-    <!-- 2. Love Letter Modal -->
+    <!-- ========== MODALS ========== -->
+    <!-- Letter -->
     <div class="modal" id="modal-letter">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('letter')">&times;</span>
@@ -400,7 +450,7 @@
         </div>
     </div>
 
-    <!-- 3. Gallery Modal -->
+    <!-- Gallery -->
     <div class="modal" id="modal-gallery">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('gallery')">&times;</span>
@@ -409,7 +459,7 @@
         </div>
     </div>
 
-    <!-- 4. 25 Reasons Modal -->
+    <!-- Reasons -->
     <div class="modal" id="modal-reasons">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('reasons')">&times;</span>
@@ -418,7 +468,7 @@
         </div>
     </div>
 
-    <!-- 5. Promise Modal -->
+    <!-- Promise -->
     <div class="modal" id="modal-promise">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('promise')">&times;</span>
@@ -431,7 +481,19 @@
         </div>
     </div>
 
-    <!-- 6. Poem Modal -->
+    <!-- Happy Birthday (replaces Vouchers) -->
+    <div class="modal" id="modal-happybirthday">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('happybirthday')">&times;</span>
+            <h2>🎂 Happy Birthday Meri Jann!</h2>
+            <div style="text-align:center;">
+                <img src="https://via.placeholder.com/400x250/ff4d6d/ffffff?text=Happy+Birthday+Azra+❤️" style="max-width:100%; border-radius:20px; border:2px solid #ffb3c6;">
+                <p style="font-size:1.5rem; margin-top:20px;">May your day be as beautiful as your heart 💝</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Poem -->
     <div class="modal" id="modal-poem">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('poem')">&times;</span>
@@ -452,7 +514,7 @@
         </div>
     </div>
 
-    <!-- 7. Playlist Modal -->
+    <!-- Playlist -->
     <div class="modal" id="modal-playlist">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('playlist')">&times;</span>
@@ -461,17 +523,17 @@
         </div>
     </div>
 
-    <!-- 8. Wish Modal (updated message) -->
+    <!-- Wish Candle (updated prayer) -->
     <div class="modal" id="modal-candle">
         <div class="modal-card" style="text-align:center;">
             <span class="close-modal" onclick="closeModal('candle')">&times;</span>
-            <h2>🕯️ Ek Wish Karo</h2>
+            <h2>🕯️ Wish</h2>
             <div class="candle" onclick="blowCandle(this)" style="font-size:6rem; cursor:pointer;">🕯️</div>
-            <div id="wishMessage" style="font-size:2rem; margin-top:20px;"></div>
+            <div id="wishMessage" style="font-size:2rem; margin-top:20px; color:#ffb3c6;"></div>
         </div>
     </div>
 
-    <!-- 9. Timeline Modal -->
+    <!-- Timeline -->
     <div class="modal" id="modal-timeline">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('timeline')">&times;</span>
@@ -486,7 +548,7 @@
         </div>
     </div>
 
-    <!-- 10. Countdown Modal -->
+    <!-- Countdown -->
     <div class="modal" id="modal-countdown">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('countdown')">&times;</span>
@@ -498,19 +560,19 @@
         </div>
     </div>
 
-    <!-- 11. Hidden Surprise Modal -->
+    <!-- Hidden Surprise -->
     <div class="modal" id="modal-surprise">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('surprise')">&times;</span>
             <h2>🎁 Hidden Surprise</h2>
             <div class="content" style="text-align:center;">
-                <img src="hidden.jpg" onerror="this.src='https://via.placeholder.com/300x200/ff4d6d/ffffff?text=Surprise'" style="border-radius:20px; max-width:100%;">
+                <img src="https://via.placeholder.com/300x200/ff4d6d/ffffff?text=Azu+❤️" style="border-radius:20px; max-width:100%;">
                 <p style="margin-top:20px;">Humesha ❤️</p>
             </div>
         </div>
     </div>
 
-    <!-- 12. Open When Modal -->
+    <!-- Open When -->
     <div class="modal" id="modal-openwhen">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('openwhen')">&times;</span>
@@ -519,7 +581,7 @@
         </div>
     </div>
 
-    <!-- 13. Quiz Modal -->
+    <!-- Quiz -->
     <div class="modal" id="modal-quiz">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('quiz')">&times;</span>
@@ -528,7 +590,7 @@
         </div>
     </div>
 
-    <!-- 14. Stars Modal -->
+    <!-- Stars -->
     <div class="modal" id="modal-constellation">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('constellation')">&times;</span>
@@ -538,27 +600,28 @@
         </div>
     </div>
 
-    <!-- 15. Favourite Things Modal (new) -->
-    <div class="modal" id="modal-favourite">
-        <div class="modal-card" style="max-width: 700px;">
-            <span class="close-modal" onclick="closeModal('favourite')">&times;</span>
-            <h2>🌟 My Favourite Things About You</h2>
-            <div class="favourite-grid" id="favouriteGrid"></div>
+    <!-- Favourite Things (replaces Future) -->
+    <div class="modal" id="modal-favourites">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closeModal('favourites')">&times;</span>
+            <h2>💖 Favourite Things</h2>
+            <div class="favourites-grid" id="favouritesGrid"></div>
         </div>
     </div>
 
-    <!-- 16. Friends Modal (updated) -->
+    <!-- Friends (updated message) -->
     <div class="modal" id="modal-friend">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('friend')">&times;</span>
             <h2>👥 Friends</h2>
             <div class="content" style="text-align:center; font-size:2rem;">
-                <p>I am your Forever friend 💕</p>
+                <p>🤝 I am your Forever friend 🤝</p>
+                <p style="font-size:1.2rem; margin-top:20px;">Always and forever, no matter what.</p>
             </div>
         </div>
     </div>
 
-    <!-- 17. Video Modal -->
+    <!-- Video -->
     <div class="modal" id="modal-video">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('video')">&times;</span>
@@ -570,7 +633,7 @@
         </div>
     </div>
 
-    <!-- 18. Scrapbook Modal -->
+    <!-- Scrapbook -->
     <div class="modal" id="modal-scrapbook">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('scrapbook')">&times;</span>
@@ -579,7 +642,7 @@
         </div>
     </div>
 
-    <!-- 19. Heart Modal -->
+    <!-- Heart -->
     <div class="modal" id="modal-heart">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('heart')">&times;</span>
@@ -590,7 +653,7 @@
         </div>
     </div>
 
-    <!-- 20. Note Modal -->
+    <!-- Note -->
     <div class="modal" id="modal-signature">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('signature')">&times;</span>
@@ -601,7 +664,7 @@
         </div>
     </div>
 
-    <!-- 21. There is Something Modal (final) -->
+    <!-- There is Something (last modal, unchanged content) -->
     <div class="modal" id="modal-last">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('last')">&times;</span>
@@ -613,7 +676,7 @@
     </div>
 
     <script>
-        // Binary background
+        // ========== BINARY BACKGROUND ==========
         const canvas = document.getElementById('binary-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -637,7 +700,7 @@
         }
         setInterval(drawBinary, 50);
 
-        // Music
+        // ========== MUSIC ==========
         let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
         music.loop = true;
         function toggleMusic() {
@@ -645,7 +708,7 @@
             else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
         }
 
-        // Open gift
+        // ========== OPEN GIFT ==========
         function openGift() {
             const wrapper = document.getElementById('giftWrapper');
             wrapper.classList.add('open');
@@ -660,11 +723,11 @@
                 loadQuiz();
                 drawConstellationCanvas();
                 loadScrapbook();
-                loadFavouriteThings(); // load favourite things images
+                loadFavourites(); // new function for favourites grid
             }, 800);
         }
 
-        // Modal functions
+        // ========== MODAL FUNCTIONS ==========
         function openModal(id) {
             document.getElementById(modal-${id}).style.display = 'flex';
         }
@@ -676,20 +739,18 @@
             if (e.target.classList.contains('modal')) e.target.style.display = 'none';
         };
 
-        // Load gallery
+        // ========== DYNAMIC CONTENT LOADERS ==========
         function loadGallery() {
             const grid = document.getElementById('galleryGrid');
             if (!grid) return;
             grid.innerHTML = '';
             for (let i = 1; i <= 6; i++) {
                 let img = document.createElement('img');
-                img.src = photo${i}.jpg;
-                img.onerror = function() { this.src = 'https://via.placeholder.com/150/ff4d6d/fff?text=Photo'+i; };
+                img.src = https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i};
                 grid.appendChild(img);
             }
         }
 
-        // Load reasons
         function loadReasons() {
             const list = document.getElementById('reasonsList');
             if (!list) return;
@@ -729,7 +790,6 @@
             });
         }
 
-        // Load playlist
         function loadPlaylist() {
             const cont = document.getElementById('playlistItems');
             if (!cont) return;
@@ -743,7 +803,6 @@
             });
         }
 
-        // Load open when
         function loadOpenWhen() {
             const cont = document.getElementById('openWhenList');
             if (!cont) return;
@@ -764,14 +823,12 @@
             });
         }
 
-        // Load quiz placeholder
         function loadQuiz() {
             const cont = document.getElementById('quizContainer');
             if (!cont) return;
             cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
         }
 
-        // Draw constellation
         function drawConstellationCanvas() {
             const c = document.getElementById('constellationCanvas');
             if (!c) return;
@@ -786,50 +843,45 @@
             ctx.stroke();
         }
 
-        // Load scrapbook
         function loadScrapbook() {
             const grid = document.getElementById('scrapbookGrid');
             if (!grid) return;
             grid.innerHTML = '';
             for (let i=1;i<=4;i++) {
                 let img = document.createElement('img');
-                img.src = scrap${i}.jpg;
-                img.onerror = function() { this.src = 'https://via.placeholder.com/100/ffb3c6/000?text=Page'+i; };
+                img.src = https://via.placeholder.com/100/ffb3c6/000?text=Page${i};
                 grid.appendChild(img);
             }
         }
 
-        // Load favourite things (new function)
-        function loadFavouriteThings() {
-            const grid = document.getElementById('favouriteGrid');
+        // New function for Favourite Things grid
+        function loadFavourites() {
+            const grid = document.getElementById('favouritesGrid');
             if (!grid) return;
-            const favourites = [
-                { img: 'fav1.jpg', caption: 'Your smile 😊' },
-                { img: 'fav2.jpg', caption: 'The way you laugh 🎵' },
-                { img: 'fav3.jpg', caption: 'How you say "Meri Jan" 💕' },
-                { img: 'fav4.jpg', caption: 'Our late-night talks ☕' },
-                { img: 'fav5.jpg', caption: 'The care in your eyes ✨' },
-                { img: 'fav6.jpg', caption: 'Just you being you 💫' }
-            ];
             grid.innerHTML = '';
-            favourites.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'favourite-item';
-                div.innerHTML = `
-                    <img src="${item.img}" alt="${item.caption}" onerror="this.src='https://via.placeholder.com/200x150/ff4d6d/ffffff?text=Favourite'">
-                    <p>${item.caption}</p>
-                `;
-                grid.appendChild(div);
+            const favourites = [
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🌸', caption: 'Your Smile' },
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=👀', caption: 'Your Eyes' },
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🗣️', caption: 'Your Voice' },
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🤗', caption: 'Your Hugs' },
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=💬', caption: 'Your Laugh' },
+                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=❤️', caption: 'Everything' }
+            ];
+            favourites.forEach(f => {
+                let item = document.createElement('div');
+                item.className = 'favourite-item';
+                item.innerHTML = <img src="${f.img}"><p>${f.caption}</p>;
+                grid.appendChild(item);
             });
         }
 
-        // Candle wish (updated)
+        // Candle blow with Urdu prayer
         function blowCandle(el) {
             el.innerHTML = '💨';
-            document.getElementById('wishMessage').innerHTML = 'Allah Tumhain Hamesha Hansta Murskarata Rkhy meri jan ❤️';
+            document.getElementById('wishMessage').innerHTML = 'Allah Tumhain Hamesha Muskarata Rkhy meri jan ✨';
         }
 
-        // Countdown timer
+        // Countdown update
         function updateCountdown() {
             const bday = new Date('March 4, 2025').getTime();
             const now = new Date().getTime();
@@ -845,6 +897,27 @@
             }
         }
         setInterval(updateCountdown, 1000);
+
+        // ========== FLOATING HEARTS & STARS GENERATOR ==========
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            container.innerHTML = '';
+            const symbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '✨', '⭐', '🌟', '💫', '🎇'];
+            for (let i = 0; i < 40; i++) {
+                const el = document.createElement('div');
+                const isHeart = Math.random() > 0.5;
+                el.className = isHeart ? 'heart-float' : 'star-float';
+                el.textContent = isHeart ? symbols[Math.floor(Math.random() * 7)] : symbols[7 + Math.floor(Math.random() * 5)];
+                el.style.left = Math.random() * 100 + '%';
+                el.style.animationDelay = Math.random() * 15 + 's';
+                el.style.animationDuration = (12 + Math.random() * 15) + 's';
+                el.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
+                el.style.opacity = 0.5 + Math.random() * 0.5;
+                container.appendChild(el);
+            }
+        }
+        createFloatingElements();
+        setInterval(createFloatingElements, 20000);
     </script>
 </body>
 </html>
