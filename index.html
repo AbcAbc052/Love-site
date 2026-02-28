@@ -676,248 +676,263 @@
     </div>
 
     <script>
-        // ========== BINARY BACKGROUND ==========
-        const canvas = document.getElementById('binary-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const binary = '01';
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let x = 0; x < columns; x++) drops[x] = 1;
-        function drawBinary() {
-            ctx.fillStyle = 'rgba(10,15,30,0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ff4d6d';
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                let text = binary[Math.floor(Math.random() * binary.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
+    // ========== BINARY BACKGROUND ==========
+    const canvas = document.getElementById('binary-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const binary = '01';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+    function drawBinary() {
+        ctx.fillStyle = 'rgba(10,15,30,0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ff4d6d';
+        ctx.font = fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            let text = binary[Math.floor(Math.random() * binary.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
         }
-        setInterval(drawBinary, 50);
+    }
+    setInterval(drawBinary, 50);
 
-        // ========== MUSIC ==========
-        let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-        music.loop = true;
-        function toggleMusic() {
-            if (music.paused) { music.play(); document.getElementById('musicBtn').innerHTML = '⏸️'; }
-            else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
-        }
+    // ========== MUSIC ==========
+    let music = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    music.loop = true;
+    function toggleMusic() {
+        if (music.paused) { music.play(); document.getElementById('musicBtn').innerHTML = '⏸️'; }
+        else { music.pause(); document.getElementById('musicBtn').innerHTML = '🎵'; }
+    }
 
-        // ========== OPEN GIFT ==========
-        function openGift() {
-            const wrapper = document.getElementById('giftWrapper');
-            wrapper.classList.add('open');
-            setTimeout(() => {
-                wrapper.style.display = 'none';
-                document.getElementById('iconsContainer').style.display = 'flex';
-                // Load dynamic content
-                loadGallery();
-                loadReasons();
-                loadPlaylist();
-                loadOpenWhen();
-                loadQuiz();
-                drawConstellationCanvas();
-                loadScrapbook();
-                loadFavourites(); // new function for favourites grid
-            }, 800);
+    // ========== OPEN GIFT (using event listener) ==========
+    function openGift() {
+        console.log('openGift triggered'); // Debug log
+        const wrapper = document.getElementById('giftWrapper');
+        if (!wrapper) {
+            console.error('giftWrapper not found!');
+            return;
         }
+        wrapper.classList.add('open');
+        setTimeout(() => {
+            wrapper.style.display = 'none';
+            document.getElementById('iconsContainer').style.display = 'flex';
+            // Load dynamic content
+            loadGallery();
+            loadReasons();
+            loadPlaylist();
+            loadOpenWhen();
+            loadQuiz();
+            drawConstellationCanvas();
+            loadScrapbook();
+            loadFavourites();
+        }, 800);
+    }
 
-        // ========== MODAL FUNCTIONS ==========
-        function openModal(id) {
-            document.getElementById(modal-${id}).style.display = 'flex';
+    // Attach click listener after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        const wrapper = document.getElementById('giftWrapper');
+        if (wrapper) {
+            wrapper.addEventListener('click', openGift);
+            console.log('Click listener attached to giftWrapper');
+        } else {
+            console.error('giftWrapper not found on DOM load');
         }
-        function closeModal(id) {
-            document.getElementById(modal-${id}).style.display = 'none';
-        }
+    });
 
-        window.onclick = function(e) {
-            if (e.target.classList.contains('modal')) e.target.style.display = 'none';
-        };
+    // ========== MODAL FUNCTIONS ==========
+    function openModal(id) {
+        document.getElementById(modal-${id}).style.display = 'flex';
+    }
+    function closeModal(id) {
+        document.getElementById(modal-${id}).style.display = 'none';
+    }
 
-        // ========== DYNAMIC CONTENT LOADERS ==========
-        function loadGallery() {
-            const grid = document.getElementById('galleryGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            for (let i = 1; i <= 6; i++) {
-                let img = document.createElement('img');
-                img.src = https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i};
-                grid.appendChild(img);
-            }
-        }
+    window.onclick = function(e) {
+        if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+    };
 
-        function loadReasons() {
-            const list = document.getElementById('reasonsList');
-            if (!list) return;
-            const reasons = [
-                'Your smile that lights up my world',
-                'The way you laugh — pure magic',
-                'Your eyes — I get lost in them',
-                'Your voice — it calms me down',
-                'The way you say "Meri Jan"',
-                'You understand me without words',
-                'You make ordinary days special',
-                'You believe in me when I doubt',
-                'You feel like home',
-                'You complete me',
-                'The way you get shy',
-                'Your random texts that make my day',
-                'How you care about small things',
-                'Your stubbornness (I secretly love it)',
-                'The way you say my name',
-                'You accepted me for who I am',
-                'You\'re my peace in chaos',
-                'My first thought in the morning',
-                'My last thought at night',
-                'You made me believe in love',
-                'Your eyes sparkle when happy',
-                'You know when something is wrong',
-                'The sounds you make when excited',
-                'Your hugs — they fix everything',
-                'You exist. That\'s enough.'
-            ];
-            list.innerHTML = '';
-            reasons.forEach((r, i) => {
-                let div = document.createElement('div');
-                div.className = 'reason-item';
-                div.textContent = ${i+1}. ${r};
-                list.appendChild(div);
-            });
+    // ========== DYNAMIC CONTENT LOADERS ==========
+    function loadGallery() {
+        const grid = document.getElementById('galleryGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        for (let i = 1; i <= 6; i++) {
+            let img = document.createElement('img');
+            img.src = https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i};
+            grid.appendChild(img);
         }
+    }
 
-        function loadPlaylist() {
-            const cont = document.getElementById('playlistItems');
-            if (!cont) return;
-            cont.innerHTML = '';
-            const songs = ['Ishq Mubarak - Arijit Singh', 'Tum Hi Ho - Arijit Singh', 'Raabta - Arikit Singh', 'Humsafar - Akhil Sachdeva', 'Tera Zikr - Darshan Raval'];
-            songs.forEach((s, i) => {
-                let div = document.createElement('div');
-                div.className = 'playlist-item';
-                div.textContent = ${i+1}. ${s};
-                cont.appendChild(div);
-            });
-        }
+    function loadReasons() {
+        const list = document.getElementById('reasonsList');
+        if (!list) return;
+        const reasons = [
+            'Your smile that lights up my world',
+            'The way you laugh — pure magic',
+            'Your eyes — I get lost in them',
+            'Your voice — it calms me down',
+            'The way you say "Meri Jan"',
+            'You understand me without words',
+            'You make ordinary days special',
+            'You believe in me when I doubt',
+            'You feel like home',
+            'You complete me',
+            'The way you get shy',
+            'Your random texts that make my day',
+            'How you care about small things',
+            'Your stubbornness (I secretly love it)',
+            'The way you say my name',
+            'You accepted me for who I am',
+            'You\'re my peace in chaos',
+            'My first thought in the morning',
+            'My last thought at night',
+            'You made me believe in love',
+            'Your eyes sparkle when happy',
+            'You know when something is wrong',
+            'The sounds you make when excited',
+            'Your hugs — they fix everything',
+            'You exist. That\'s enough.'
+        ];
+        list.innerHTML = '';
+        reasons.forEach((r, i) => {
+            let div = document.createElement('div');
+            div.className = 'reason-item';
+            div.textContent = ${i+1}. ${r};
+            list.appendChild(div);
+        });
+    }
 
-        function loadOpenWhen() {
-            const cont = document.getElementById('openWhenList');
-            if (!cont) return;
-            cont.innerHTML = '';
-            const letters = [
-                '💕 Open When You Miss Me: I miss you too... sending a hug.',
-                '🥺 Open When You\'re Sad: Wipe those tears, I\'m here.',
-                '😊 Open When You\'re Happy: Keep smiling forever.',
-                '🌙 Open When You Can\'t Sleep: Imagine my arms around you.',
-                '🫂 Open When You\'re Angry At Me: Let\'s talk, I love you.',
-                '💖 Open When You Need to Feel Loved: You are my everything.'
-            ];
-            letters.forEach(l => {
-                let p = document.createElement('p');
-                p.textContent = l;
-                p.style.margin = '10px 0';
-                cont.appendChild(p);
-            });
-        }
+    function loadPlaylist() {
+        const cont = document.getElementById('playlistItems');
+        if (!cont) return;
+        cont.innerHTML = '';
+        const songs = ['Ishq Mubarak - Arijit Singh', 'Tum Hi Ho - Arijit Singh', 'Raabta - Arikit Singh', 'Humsafar - Akhil Sachdeva', 'Tera Zikr - Darshan Raval'];
+        songs.forEach((s, i) => {
+            let div = document.createElement('div');
+            div.className = 'playlist-item';
+            div.textContent = ${i+1}. ${s};
+            cont.appendChild(div);
+        });
+    }
 
-        function loadQuiz() {
-            const cont = document.getElementById('quizContainer');
-            if (!cont) return;
-            cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
-        }
+    function loadOpenWhen() {
+        const cont = document.getElementById('openWhenList');
+        if (!cont) return;
+        cont.innerHTML = '';
+        const letters = [
+            '💕 Open When You Miss Me: I miss you too... sending a hug.',
+            '🥺 Open When You\'re Sad: Wipe those tears, I\'m here.',
+            '😊 Open When You\'re Happy: Keep smiling forever.',
+            '🌙 Open When You Can\'t Sleep: Imagine my arms around you.',
+            '🫂 Open When You\'re Angry At Me: Let\'s talk, I love you.',
+            '💖 Open When You Need to Feel Loved: You are my everything.'
+        ];
+        letters.forEach(l => {
+            let p = document.createElement('p');
+            p.textContent = l;
+            p.style.margin = '10px 0';
+            cont.appendChild(p);
+        });
+    }
 
-        function drawConstellationCanvas() {
-            const c = document.getElementById('constellationCanvas');
-            if (!c) return;
-            const ctx = c.getContext('2d');
-            ctx.clearRect(0,0,c.width,c.height);
-            ctx.fillStyle = 'white';
-            for (let i=0;i<50;i++) ctx.fillRect(Math.random()*c.width, Math.random()*c.height,2,2);
-            ctx.strokeStyle = '#ff4d6d';
-            ctx.beginPath();
-            ctx.moveTo(200,50);
-            ctx.quadraticCurveTo(300,150,200,150);
-            ctx.stroke();
-        }
+    function loadQuiz() {
+        const cont = document.getElementById('quizContainer');
+        if (!cont) return;
+        cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
+    }
 
-        function loadScrapbook() {
-            const grid = document.getElementById('scrapbookGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            for (let i=1;i<=4;i++) {
-                let img = document.createElement('img');
-                img.src = https://via.placeholder.com/100/ffb3c6/000?text=Page${i};
-                grid.appendChild(img);
-            }
-        }
+    function drawConstellationCanvas() {
+        const c = document.getElementById('constellationCanvas');
+        if (!c) return;
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0,0,c.width,c.height);
+        ctx.fillStyle = 'white';
+        for (let i=0;i<50;i++) ctx.fillRect(Math.random()*c.width, Math.random()*c.height,2,2);
+        ctx.strokeStyle = '#ff4d6d';
+        ctx.beginPath();
+        ctx.moveTo(200,50);
+        ctx.quadraticCurveTo(300,150,200,150);
+        ctx.stroke();
+    }
 
-        // New function for Favourite Things grid
-        function loadFavourites() {
-            const grid = document.getElementById('favouritesGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            const favourites = [
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🌸', caption: 'Your Smile' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=👀', caption: 'Your Eyes' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🗣️', caption: 'Your Voice' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🤗', caption: 'Your Hugs' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=💬', caption: 'Your Laugh' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=❤️', caption: 'Everything' }
-            ];
-            favourites.forEach(f => {
-                let item = document.createElement('div');
-                item.className = 'favourite-item';
-                item.innerHTML = <img src="${f.img}"><p>${f.caption}</p>;
-                grid.appendChild(item);
-            });
+    function loadScrapbook() {
+        const grid = document.getElementById('scrapbookGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        for (let i=1;i<=4;i++) {
+            let img = document.createElement('img');
+            img.src = https://via.placeholder.com/100/ffb3c6/000?text=Page${i};
+            grid.appendChild(img);
         }
+    }
 
-        // Candle blow with Urdu prayer
-        function blowCandle(el) {
-            el.innerHTML = '💨';
-            document.getElementById('wishMessage').innerHTML = 'Allah Tumhain Hamesha Muskarata Rkhy meri jan ✨';
-        }
+    function loadFavourites() {
+        const grid = document.getElementById('favouritesGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        const favourites = [
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🌸', caption: 'Your Smile' },
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=👀', caption: 'Your Eyes' },
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🗣️', caption: 'Your Voice' },
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🤗', caption: 'Your Hugs' },
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=💬', caption: 'Your Laugh' },
+            { img: 'https://via.placeholder.com/150/ffb3c6/000?text=❤️', caption: 'Everything' }
+        ];
+        favourites.forEach(f => {
+            let item = document.createElement('div');
+            item.className = 'favourite-item';
+            item.innerHTML = <img src="${f.img}"><p>${f.caption}</p>;
+            grid.appendChild(item);
+        });
+    }
 
-        // Countdown update
-        function updateCountdown() {
-            const bday = new Date('March 4, 2025').getTime();
-            const now = new Date().getTime();
-            const diff = bday - now;
-            if (diff > 0) {
-                document.getElementById('countdownDisplay').innerHTML = 
-                    Math.floor(diff/(1000*60*60*24))+'d '+
-                    Math.floor((diff%(1000*60*60*24))/(1000*60*60))+'h '+
-                    Math.floor((diff%(1000*60*60))/(1000*60))+'m '+
-                    Math.floor((diff%(1000*60))/1000)+'s';
-            } else {
-                document.getElementById('countdownDisplay').innerHTML = '🎉 It\'s her birthday! 🎉';
-            }
-        }
-        setInterval(updateCountdown, 1000);
+    function blowCandle(el) {
+        el.innerHTML = '💨';
+        document.getElementById('wishMessage').innerHTML = 'Allah Tumhain Hamesha Muskarata Rkhy meri jan ✨';
+    }
 
-        // ========== FLOATING HEARTS & STARS GENERATOR ==========
-        function createFloatingElements() {
-            const container = document.getElementById('floatingElements');
-            container.innerHTML = '';
-            const symbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '✨', '⭐', '🌟', '💫', '🎇'];
-            for (let i = 0; i < 40; i++) {
-                const el = document.createElement('div');
-                const isHeart = Math.random() > 0.5;
-                el.className = isHeart ? 'heart-float' : 'star-float';
-                el.textContent = isHeart ? symbols[Math.floor(Math.random() * 7)] : symbols[7 + Math.floor(Math.random() * 5)];
-                el.style.left = Math.random() * 100 + '%';
-                el.style.animationDelay = Math.random() * 15 + 's';
-                el.style.animationDuration = (12 + Math.random() * 15) + 's';
-                el.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
-                el.style.opacity = 0.5 + Math.random() * 0.5;
-                container.appendChild(el);
-            }
+    function updateCountdown() {
+        const bday = new Date('March 4, 2025').getTime();
+        const now = new Date().getTime();
+        const diff = bday - now;
+        if (diff > 0) {
+            document.getElementById('countdownDisplay').innerHTML = 
+                Math.floor(diff/(1000*60*60*24))+'d '+
+                Math.floor((diff%(1000*60*60*24))/(1000*60*60))+'h '+
+                Math.floor((diff%(1000*60*60))/(1000*60))+'m '+
+                Math.floor((diff%(1000*60))/1000)+'s';
+        } else {
+            document.getElementById('countdownDisplay').innerHTML = '🎉 It\'s her birthday! 🎉';
         }
-        createFloatingElements();
-        setInterval(createFloatingElements, 20000);
-    </script>
+    }
+    setInterval(updateCountdown, 1000);
+
+    // ========== FLOATING HEARTS & STARS GENERATOR ==========
+    function createFloatingElements() {
+        const container = document.getElementById('floatingElements');
+        if (!container) return;
+        container.innerHTML = '';
+        const symbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '✨', '⭐', '🌟', '💫', '🎇'];
+        for (let i = 0; i < 40; i++) {
+            const el = document.createElement('div');
+            const isHeart = Math.random() > 0.5;
+            el.className = isHeart ? 'heart-float' : 'star-float';
+            el.textContent = isHeart ? symbols[Math.floor(Math.random() * 7)] : symbols[7 + Math.floor(Math.random() * 5)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.animationDelay = Math.random() * 15 + 's';
+            el.style.animationDuration = (12 + Math.random() * 15) + 's';
+            el.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
+            el.style.opacity = 0.5 + Math.random() * 0.5;
+            container.appendChild(el);
+        }
+    }
+    createFloatingElements();
+    setInterval(createFloatingElements, 20000);
+</script>
 </body>
 </html>
+
