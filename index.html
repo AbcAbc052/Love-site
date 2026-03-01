@@ -621,7 +621,7 @@
         </div>
     </div>
 
-    <!-- Video (restored original) -->
+    <!-- Video (original, unmodified) -->
     <div class="modal" id="modal-video">
         <div class="modal-card">
             <span class="close-modal" onclick="closeModal('video')">&times;</span>
@@ -903,11 +903,11 @@
             const now = new Date().getTime();
             const diff = bday - now;
             if (diff > 0) {
-                document.getElementById('countdownDisplay').innerHTML = 
-                    Math.floor(diff / (1000 * 60 * 60 * 24)) + 'd ' +
-                    Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + 'h ' +
-                    Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)) + 'm ' +
-                    Math.floor((diff % (1000 * 60)) / 1000) + 's';
+                let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('countdownDisplay').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
             } else {
                 document.getElementById('countdownDisplay').innerHTML = '🎉 It\'s her birthday! 🎉';
             }
