@@ -748,12 +748,12 @@
         });
 
         // ========== MODAL FUNCTIONS ==========
-        function openModal(id) {
-            document.getElementById(modal-${id}).style.display = 'flex';
-        }
-        function closeModal(id) {
-            document.getElementById(modal-${id}).style.display = 'none';
-        }
+       function openModal(id) {
+    document.getElementById('modal-' + id).style.display = 'flex';
+}
+       function closeModal(id) {
+    document.getElementById('modal-' + id).style.display = 'none';
+}
         window.onclick = function(e) {
             if (e.target.classList.contains('modal')) e.target.style.display = 'none';
         };
@@ -938,3 +938,4 @@
     </script>
 </body>
 </html>
+
