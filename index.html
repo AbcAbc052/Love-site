@@ -321,6 +321,48 @@
             z-index: 200;
             box-shadow: 0 0 30px #ff4d6d;
         }
+        /* Quiz styles */
+        .quiz-question {
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        .quiz-question p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .quiz-option {
+            display: block;
+            margin: 5px 0;
+            padding: 8px 12px;
+            background: #2a2f45;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .quiz-option:hover {
+            background: #ff4d6d;
+        }
+        .quiz-option input {
+            margin-right: 10px;
+            accent-color: #ff4d6d;
+        }
+        .quiz-submit {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 15px 0;
+        }
+        .quiz-result {
+            font-size: 1.5rem;
+            color: #ffb3c6;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -339,11 +381,12 @@
         </div>
 
         <div class="icons-container" id="iconsContainer">
-            <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Letter</p></div>
+            <!-- Happy Birthday first, Letter fifth -->
+            <div class="icon-item" onclick="openModal('happybirthday')"><span>🎂</span><p>Happy Birthday</p></div>
             <div class="icon-item" onclick="openModal('gallery')"><span>📸</span><p>Gallery</p></div>
             <div class="icon-item" onclick="openModal('reasons')"><span>💖</span><p>Reasons</p></div>
             <div class="icon-item" onclick="openModal('promise')"><span>🤝</span><p>Promise</p></div>
-            <div class="icon-item" onclick="openModal('happybirthday')"><span>🎂</span><p>Happy Birthday</p></div>
+            <div class="icon-item" onclick="openModal('letter')"><span>💌</span><p>Letter</p></div>
             <div class="icon-item" onclick="openModal('poem')"><span>📝</span><p>Poem</p></div>
             <div class="icon-item" onclick="openModal('playlist')"><span>🎵</span><p>Playlist</p></div>
             <div class="icon-item" onclick="openModal('candle')"><span>🕯️</span><p>Wish</p></div>
@@ -363,7 +406,7 @@
         </div>
     </div>
 
-    <!-- Modals (condensed for brevity – all present in final code) -->
+    <!-- Modals -->
     <!-- Letter Modal -->
     <div class="modal" id="modal-letter"><div class="modal-card"><span class="close-modal" onclick="closeModal('letter')">&times;</span><h2>💌 Love Letter</h2><div class="content"><p style="font-size:1.3rem;">Meri Jan pehly Pehly to Yahiii kahonga k Janan Din Mubarak Ho meri jan,<br>Tum smjh sktiii ho how can i feel for you,<br>Tum mery liye sab sy brh k Ho,<br>Is Special Din k moqay pr m yahi kahonga K Allah tumhain Khusian day,<br>Allah tumhain Hamesha mery sath Rkhy,<br>M janta hn tum kis qdr zrori ho mery liye i love you meri jan</p><p>Hey jan,<br><br>You're the melody that fills my heart with joy, the rhythm that makes life worth living. Every moment with you is a sweet serendipity, a reminder that I'm exactly where I'm meant to be.<br><br>Thanks for being my partner in crime, my confidant, and my forever crush 😊<br><br>Happy birthday, my love!</p></div></div></div>
 
@@ -377,7 +420,11 @@
     <div class="modal" id="modal-promise"><div class="modal-card"><span class="close-modal" onclick="closeModal('promise')">&times;</span><h2>🤝 Promise</h2><div class="content"><p style="font-size:1.8rem;">"Halat jaisy bhi ho jain meri jan M kabhi niii chor skta tumhain,<br>M wada krta hn hamesha tumhara muntazir rahonga"<br><br><span style="font-size:2rem;">" Tumhara Akm "</span></p></div></div></div>
 
     <!-- Happy Birthday Modal -->
-    <div class="modal" id="modal-happybirthday"><div class="modal-card"><span class="close-modal" onclick="closeModal('happybirthday')">&times;</span><h2>🎂 Happy Birthday Meri Jann!</h2><div style="text-align:center;"><div style="font-size:6rem;">🎉🎂🎈</div><p style="font-size:1.5rem; margin-top:20px;">May your day be as beautiful as your heart 💝</p></div></div></div>
+    <div class="modal" id="modal-happybirthday"><div class="modal-card"><span class="close-modal" onclick="closeModal('happybirthday')">&times;</span><h2>🎂 Happy Birthday Meri Jann!</h2><div style="text-align:center;">
+        <!-- Replace with your actual image later -->
+        <img src="https://via.placeholder.com/400x250/ff4d6d/ffffff?text=Your+Photo+Here" style="max-width:100%; border-radius:20px; border:2px solid #ffb3c6;">
+        <p style="font-size:1.5rem; margin-top:20px;">May your day be as beautiful as your heart 💝</p>
+    </div></div></div>
 
     <!-- Poem Modal -->
     <div class="modal" id="modal-poem"><div class="modal-card"><span class="close-modal" onclick="closeModal('poem')">&times;</span><h2>📝 Poem</h2><div class="content" style="font-size:1.3rem; line-height:2;">تم آئی تو خاموشی نے بھی آواز دی<br>ہر سانس نے اک نیا انداز دیا<br><br>تم ہنسی تو پھول کھلے راستوں میں<br>تم چلی تو خوشبو نے تعاقب کیا<br><br>یہ دن کہ جب تم نے پہلی بار سانس لیا<br>آسمان نے بھی جشن منایا ہوگا<br><br>آج بھی تم ویسی ہو نرم روشن<br>جیسے صبح کی پہلی کرن<br><br>مبارک ہو میری جان<br>تم ہو تو میں ہوں<br>تم ہو تو سب ہے</div></div></div>
@@ -394,14 +441,16 @@
     <!-- Countdown Modal -->
     <div class="modal" id="modal-countdown"><div class="modal-card"><span class="close-modal" onclick="closeModal('countdown')">&times;</span><h2>⏳ Countdown</h2><div class="content" style="text-align:center;"><div style="font-size:2rem;" id="countdownDisplay"></div><p style="margin-top:20px;">4 March 2004 ❤️</p></div></div></div>
 
-    <!-- Hidden Surprise Modal -->
-    <div class="modal" id="modal-surprise"><div class="modal-card"><span class="close-modal" onclick="closeModal('surprise')">&times;</span><h2>🎁 Hidden Surprise</h2><div class="content" style="text-align:center;"><div style="font-size:6rem;">❤️✨🎁</div><p style="margin-top:20px;">Humesha ❤️</p></div></div></div>
+    <!-- Hidden Surprise Modal (updated text) -->
+    <div class="modal" id="modal-surprise"><div class="modal-card"><span class="close-modal" onclick="closeModal('surprise')">&times;</span><h2>🎁 Hidden Surprise</h2><div class="content" style="text-align:center; font-size:1.8rem;">
+        <p>Akm is always here for you Meri Jan ,I love you akm diiii jan</p>
+    </div></div></div>
 
     <!-- Open When Modal -->
     <div class="modal" id="modal-openwhen"><div class="modal-card"><span class="close-modal" onclick="closeModal('openwhen')">&times;</span><h2>💌 Open When...</h2><div id="openWhenList"></div></div></div>
 
-    <!-- Quiz Modal -->
-    <div class="modal" id="modal-quiz"><div class="modal-card"><span class="close-modal" onclick="closeModal('quiz')">&times;</span><h2>❓ Quiz</h2><div id="quizContainer"></div></div></div>
+    <!-- Quiz Modal (updated questions) -->
+    <div class="modal" id="modal-quiz"><div class="modal-card"><span class="close-modal" onclick="closeModal('quiz')">&times;</span><h2>❓ How well do you know Akm?</h2><div id="quizContainer"></div></div></div>
 
     <!-- Stars Modal -->
     <div class="modal" id="modal-constellation"><div class="modal-card"><span class="close-modal" onclick="closeModal('constellation')">&times;</span><h2>✨ Stars</h2><canvas id="constellationCanvas" width="400" height="200" style="width:100%; background:#000; border-radius:20px;"></canvas><p style="text-align:center; margin-top:10px;">6 June 2004</p></div></div>
@@ -412,7 +461,7 @@
     <!-- Friends Modal -->
     <div class="modal" id="modal-friend"><div class="modal-card"><span class="close-modal" onclick="closeModal('friend')">&times;</span><h2>👥 Friends</h2><div class="content" style="text-align:center; font-size:2rem;"><p>🤝 I am your Forever friend 🤝</p><p style="font-size:1.2rem; margin-top:20px;">Always and forever, no matter what.</p></div></div></div>
 
-    <!-- Video Modal (original) -->
+    <!-- Video Modal -->
     <div class="modal" id="modal-video"><div class="modal-card"><span class="close-modal" onclick="closeModal('video')">&times;</span><h2>📹 Video</h2><video controls style="width:100%; border-radius:20px;"><source src="your-video.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>
 
     <!-- Scrapbook Modal -->
@@ -485,7 +534,7 @@
             if (wrapper) wrapper.addEventListener('click', openGift);
         });
 
-        // ========== MODAL FUNCTIONS (CORRECTED) ==========
+        // ========== MODAL FUNCTIONS ==========
         function openModal(id) {
             document.getElementById('modal-' + id).style.display = 'flex';
         }
@@ -567,10 +616,67 @@
             });
         }
 
+        // ========== QUIZ (updated questions) ==========
+        const quizQuestions = [
+            {
+                question: "What is my favourite colour?",
+                options: ["Black", "Blue", "Red", "White"],
+                answer: 0 // Black
+            },
+            {
+                question: "What day of the week did we first meet?",
+                options: ["Monday", "Tuesday", "Friday", "Sunday"],
+                answer: 0 // Monday
+            },
+            {
+                question: "What is our special place?",
+                options: ["Indus Hotel", "Beach", "Park", "Restaurant"],
+                answer: 0 // Indus Hotel
+            },
+            {
+                question: "When is my birthday?",
+                options: ["6 June 2004", "4 March 2004", "6 June 2005", "4 March 2005"],
+                answer: 0 // 6 June 2004
+            },
+            {
+                question: "What do I always say to you?",
+                options: ["I love you", "Meri Jan", "Take care", "Miss you"],
+                answer: 0 // I love you
+            },
+            {
+                question: "What was the first thing I noticed about you?",
+                options: ["Your smile", "Your eyes", "Your voice", "Your personality"],
+                answer: 1 // Your eyes
+            }
+        ];
+
         function loadQuiz() {
-            const cont = document.getElementById('quizContainer');
-            if (!cont) return;
-            cont.innerHTML = '<p>Quiz coming soon! (You can add interactive questions here.)</p>';
+            const container = document.getElementById('quizContainer');
+            if (!container) return;
+            let html = '<form id="quizForm">';
+            quizQuestions.forEach((q, idx) => {
+                html += `<div class="quiz-question"><p>${idx+1}. ${q.question}</p>`;
+                q.options.forEach((opt, optIdx) => {
+                    html += `<label class="quiz-option"><input type="radio" name="q${idx}" value="${optIdx}"> ${opt}</label>`;
+                });
+                html += '</div>';
+            });
+            html += '</form><button class="quiz-submit" onclick="submitQuiz()">Submit Answers</button><div id="quizResult" class="quiz-result"></div>';
+            container.innerHTML = html;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            for (let i = 0; i < quizQuestions.length; i++) {
+                const radios = document.getElementsByName('q' + i);
+                for (let j = 0; j < radios.length; j++) {
+                    if (radios[j].checked && j == quizQuestions[i].answer) {
+                        score++;
+                        break;
+                    }
+                }
+            }
+            document.getElementById('quizResult').innerHTML = `You got ${score} out of ${quizQuestions.length} correct! ❤️`;
         }
 
         function drawConstellationCanvas() {
