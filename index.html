@@ -263,15 +263,34 @@
         }
         .gallery-grid, .favourites-grid {
             display: grid;
-            
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
         .gallery-grid img, .favourites-grid img {
             width: 100%;
-            height:150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 10px;
+            border: 2px solid #ff4d6d;
+        }
+        /* Make the Gallery modal full-screen with large images */
+        #modal-gallery .modal-card {
+            width: 95vw;
+            max-width: 95vw;
+            height: 95vh;
+            max-height: 95vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #modal-gallery .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        #modal-gallery .gallery-grid img {
+            width: 100%;
+            height: 40vh; /* larger height relative to viewport */
+            object-fit: cover;
+            border-radius: 15px;
             border: 2px solid #ff4d6d;
         }
         .favourite-item {
@@ -367,30 +386,26 @@
             text-align: center;
         }
         /* Make the scrapbook modal nearly full-screen */
-#modal-scrapbook .modal-card {
-    width: 95vw;
-    max-width: 95vw;
-    height: 95vh;
-    max-height: 95vh;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Make the scrapbook grid use a single column so images are larger */
-#modal-scrapbook .gallery-grid {
-    grid-template-columns: 1fr !important;  /* one column */
-    gap: 20px;
-}
-
-/* Make scrapbook images fill the width and be tall enough */
-#modal-scrapbook .gallery-grid img {
-    width: 100%;
-    height: auto;
-    max-height: calc(95vh - 150px); /* adjust based on header + padding */
-    object-fit: contain;
-    border-radius: 15px;
-    border: 2px solid #ff4d6d;
-}
+        #modal-scrapbook .modal-card {
+            width: 95vw;
+            max-width: 95vw;
+            height: 95vh;
+            max-height: 95vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #modal-scrapbook .gallery-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px;
+        }
+        #modal-scrapbook .gallery-grid img {
+            width: 100%;
+            height: auto;
+            max-height: calc(95vh - 150px);
+            object-fit: contain;
+            border-radius: 15px;
+            border: 2px solid #ff4d6d;
+        }
     </style>
 </head>
 <body>
@@ -469,16 +484,14 @@
     <!-- Countdown Modal -->
     <div class="modal" id="modal-countdown"><div class="modal-card"><span class="close-modal" onclick="closeModal('countdown')">&times;</span><h2>⏳ Countdown</h2><div class="content" style="text-align:center;"><div style="font-size:2rem;" id="countdownDisplay"></div><p style="margin-top:20px;">4 March 2004 ❤️</p></div></div></div>
 
-    <!-- Hidden Surprise Modal (updated text) -->
-    <div class="modal" id="modal-surprise"><div class="modal-card"><span class="close-modal" onclick="closeModal('surprise')">&times;</span><h2>🎁 Hidden Surprise</h2><div class="content" style="text-align:center; font-size:1.8rem;">
-        <p>Akm is always here for you Meri Jan ,I love you akm diiii jan</p>
-    </div></div></div>
+    <!-- Hidden Surprise Modal -->
+    <div class="modal" id="modal-surprise"><div class="modal-card"><span class="close-modal" onclick="closeModal('surprise')">&times;</span><h2>🎁 Hidden Surprise</h2><div class="content" style="text-align:center;"><div style="font-size:6rem;">❤️✨🎁</div><p style="margin-top:20px;">Humesha ❤️</p></div></div></div>
 
     <!-- Open When Modal -->
     <div class="modal" id="modal-openwhen"><div class="modal-card"><span class="close-modal" onclick="closeModal('openwhen')">&times;</span><h2>💌 Open When...</h2><div id="openWhenList"></div></div></div>
 
-    <!-- Quiz Modal (updated questions) -->
-    <div class="modal" id="modal-quiz"><div class="modal-card"><span class="close-modal" onclick="closeModal('quiz')">&times;</span><h2>❓ How well do you know Akm?</h2><div id="quizContainer"></div></div></div>
+    <!-- Quiz Modal -->
+    <div class="modal" id="modal-quiz"><div class="modal-card"><span class="close-modal" onclick="closeModal('quiz')">&times;</span><h2>❓ Quiz about Azra</h2><div id="quizContainer"></div></div></div>
 
     <!-- Stars Modal -->
     <div class="modal" id="modal-constellation"><div class="modal-card"><span class="close-modal" onclick="closeModal('constellation')">&times;</span><h2>✨ Stars</h2><canvas id="constellationCanvas" width="400" height="200" style="width:100%; background:#000; border-radius:20px;"></canvas><p style="text-align:center; margin-top:10px;">6 June 2004</p></div></div>
@@ -580,7 +593,7 @@
             grid.innerHTML = '';
             for (let i = 1; i <= 6; i++) {
                 let img = document.createElement('img');
-                img.src = `photo${i}.jpg`;
+                img.src = `https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i}`;
                 grid.appendChild(img);
             }
         }
@@ -644,37 +657,22 @@
             });
         }
 
-        // ========== QUIZ (updated questions) ==========
+        // ========== QUIZ ==========
         const quizQuestions = [
             {
-                question: "What is my favourite colour?",
-                options: ["Black", "Blue", "Red", "White"],
-                answer: 0 // Black
+                question: "What is Azra's favourite colour?",
+                options: ["Red", "Blue", "Pink", "Purple"],
+                answer: 2 // Pink
             },
             {
-                question: "What day of the week did we first meet?",
-                options: ["Monday", "Tuesday", "Friday", "Sunday"],
-                answer: 0 // Monday
+                question: "Where did we first meet?",
+                options: ["TikTok", "Instagram", "Facebook", "School"],
+                answer: 0 // TikTok
             },
             {
-                question: "What is our special place?",
-                options: ["Indus Hotel", "Beach", "Park", "Restaurant"],
-                answer: 0 // Indus Hotel
-            },
-            {
-                question: "When is my birthday?",
-                options: ["6 June 2004", "4 March 2004", "6 June 2005", "4 March 2005"],
-                answer: 0 // 6 June 2004
-            },
-            {
-                question: "What do I always say to you?",
-                options: ["I love you", "Meri Jan", "Take care", "Miss you"],
-                answer: 0 // I love you
-            },
-            {
-                question: "What was the first thing I noticed about you?",
-                options: ["Your smile", "Your eyes", "Your voice", "Your personality"],
-                answer: 1 // Your eyes
+                question: "What is my pet name for her?",
+                options: ["Baby", "Meri Jan", "Sweetie", "Jaanu"],
+                answer: 1 // Meri Jan
             }
         ];
 
@@ -727,7 +725,7 @@
             grid.innerHTML = '';
             for (let i = 1; i <= 4; i++) {
                 let img = document.createElement('img');
-                img.src = `scrap${i}.jpg`;
+                img.src = `https://via.placeholder.com/100/ffb3c6/000?text=Page${i}`;
                 grid.appendChild(img);
             }
         }
@@ -797,9 +795,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
