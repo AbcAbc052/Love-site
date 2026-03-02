@@ -366,6 +366,31 @@
             color: #ffb3c6;
             text-align: center;
         }
+        /* Make the scrapbook modal nearly full-screen */
+#modal-scrapbook .modal-card {
+    width: 95vw;
+    max-width: 95vw;
+    height: 95vh;
+    max-height: 95vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Make the scrapbook grid use a single column so images are larger */
+#modal-scrapbook .gallery-grid {
+    grid-template-columns: 1fr !important;  /* one column */
+    gap: 20px;
+}
+
+/* Make scrapbook images fill the width and be tall enough */
+#modal-scrapbook .gallery-grid img {
+    width: 100%;
+    height: auto;
+    max-height: calc(95vh - 150px); /* adjust based on header + padding */
+    object-fit: contain;
+    border-radius: 15px;
+    border: 2px solid #ff4d6d;
+}
     </style>
 </head>
 <body>
@@ -772,6 +797,7 @@
     </script>
 </body>
 </html>
+
 
 
 
