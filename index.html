@@ -504,7 +504,7 @@
     <div class="modal" id="modal-friend"><div class="modal-card"><span class="close-modal" onclick="closeModal('friend')">&times;</span><h2>👥 Friends</h2><div class="content" style="text-align:center; font-size:2rem;"><p>🤝 I am your Forever friend 🤝</p><p style="font-size:1.2rem; margin-top:20px;">Always and forever, no matter what.</p></div></div></div>
 
     <!-- Video Modal -->
-    <div class="modal" id="modal-video"><div class="modal-card"><span class="close-modal" onclick="closeModal('video')">&times;</span><h2>📹 Video</h2><video controls style="width:100%; border-radius:20px;"><source src="myvideo.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>
+    <div class="modal" id="modal-video"><div class="modal-card"><span class="close-modal" onclick="closeModal('video')">&times;</span><h2>📹 Video</h2><video controls style="width:100%; border-radius:20px;"><source src="myvideo.mp4" type="video/webm"></video></div></div>
 
     <!-- Scrapbook Modal -->
     <div class="modal" id="modal-scrapbook"><div class="modal-card"><span class="close-modal" onclick="closeModal('scrapbook')">&times;</span><h2>📔 Scrapbook</h2><div class="gallery-grid" id="scrapbookGrid"></div></div></div>
@@ -522,7 +522,7 @@
             <h2>The Way I look</h2>
             <div style="text-align:center;">
                 <!-- Replace with your own photo -->
-                <img src="https://via.placeholder.com/300x400/ff4d6d/fff?text=My+Photo" style="max-width:100%; border-radius:20px; border:2px solid #ffb3c6;">
+                <img src="myphoto1.jpg" style="max-width:100%; border-radius:20px; border:2px solid #ffb3c6;">
                 <p style="font-size:1.3rem; margin-top:15px;">This is me, always yours ❤️</p>
             </div>
         </div>
@@ -604,7 +604,7 @@
             grid.innerHTML = '';
             for (let i = 1; i <= 6; i++) {
                 let img = document.createElement('img');
-                img.src = `https://via.placeholder.com/150/ff4d6d/fff?text=Photo${i}`;
+                img.src = `photo${i}.jpg`;
                 grid.appendChild(img);
             }
         }
@@ -736,7 +736,7 @@
             grid.innerHTML = '';
             for (let i = 1; i <= 4; i++) {
                 let img = document.createElement('img');
-                img.src = `https://via.placeholder.com/100/ffb3c6/000?text=Page${i}`;
+                img.src = `scrap${i}.jpg`;
                 grid.appendChild(img);
             }
         }
@@ -746,12 +746,12 @@
             if (!grid) return;
             grid.innerHTML = '';
             const favourites = [
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🌸', caption: 'Your Smile' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=👀', caption: 'Your Eyes' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🗣️', caption: 'Your Voice' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=🤗', caption: 'Your Hugs' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=💬', caption: 'Your Laugh' },
-                { img: 'https://via.placeholder.com/150/ffb3c6/000?text=❤️', caption: 'Everything' }
+                { img: 'smile.jpg', caption: 'Your Smile' },
+                { img: 'eyes.jpg', caption: 'Your Eyes' },
+                { img: 'voice.jpg', caption: 'Your Voice' },
+                { img: 'hug.jpg', caption: 'Your Hugs' },
+                { img: 'laugh.jpg', caption: 'Your Laugh' },
+                { img: 'everything.jpg', caption: 'Everything' }
             ];
             favourites.forEach(f => {
                 let item = document.createElement('div');
@@ -806,3 +806,4 @@
     </script>
 </body>
 </html>
+
